@@ -22,6 +22,15 @@ class ProductSeeder extends Seeder
             'stock' => 4,
             'status' => 'tersedia',
         ]);
+        Product::create([
+            'name' => 'Shirt Nike',
+            'product_category_id' => $tshirtCategoryId,
+            'description' => 'nike baju',
+            'price' => 290.00,
+            'stock' => 2,
+            'status' => 'tersedia',
+        ]);
+
         // Tambahkan produk lain jika diperlukan
     }
 }

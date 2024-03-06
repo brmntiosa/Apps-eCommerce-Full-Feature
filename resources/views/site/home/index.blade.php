@@ -100,17 +100,9 @@
                         <div class="product-item {{ $product->product_category_id }}">
                             <div class="product product_filter">
                                 <div class="product_image">
-                                    @if(!empty($product->gambar1))
-                                        <img src="{{ asset($product->gambar1) }}" alt="{{ $product->name }}">
-                                    @elseif(!empty($product->gambar2))
-                                        <img src="{{ asset($product->gambar2) }}" alt="{{ $product->name }}">
-                                    @elseif(!empty($product->gambar3))
-                                        <img src="{{ asset($product->gambar3) }}" alt="{{ $product->name }}">
-                                    @elseif(!empty($product->gambar4))
-                                        <img src="{{ asset($product->gambar4) }}" alt="{{ $product->name }}">
-                                    @elseif(!empty($product->gambar5))
-                                        <img src="{{ asset($product->gambar5) }}" alt="{{ $product->name }}">
-                                    @endif
+                                   @foreach ($product->productImage as $productImage)
+                                       <img src="{{ asset($productImage['url']);}}" alt="">
+                                   @endforeach
                                 </div>
                                 <div class="favorite"></div>
                                 <div class="product_info">

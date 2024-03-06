@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductImage extends Model
 {
-    protected $fillable = ['product_id', 'url'];
+    // protected $fillable = ['product_id', 'url'];
+    protected $guarded = ['id'];
 
     public function product()
     {

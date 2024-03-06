@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\SessionController;
 use App\Http\Controllers\Site\AdminController;
+use App\Http\Controllers\Site\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use App\Http\Controllers\Site\AdminController;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\Site\HomeController@getIndex')->name('site.home.getIndex');
+Route::get('/', [HomeController::class, 'getIndex'])->name('site.home.getIndex');
 Route::get('/login', [SessionController::class, 'index'])->name('login');
 Route::post('/sesi/login', [SessionController::class, 'login']);
 Route::get('/sesi/register', [SessionController::class, 'register']);

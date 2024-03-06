@@ -13,7 +13,7 @@ public function up()
     Schema::create('products', function (Blueprint $table) {
         $table->id();
         $table->string('name');
-        $table->foreignId('product_category_id')->constrained('product_categories');
+        $table->string('product_category_id');
         $table->text('description');
         $table->decimal('price', 10, 2);
         $table->integer('stock');
