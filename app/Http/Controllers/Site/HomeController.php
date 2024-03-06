@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function getIndex()
     {
-        $products = Product::all();
+        $products = Product::with('productImage')->get();
         return view('site.home.index', ['products' => $products]);
     }
 }
