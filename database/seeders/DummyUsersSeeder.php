@@ -21,9 +21,5 @@ class DummyUsersSeeder extends Seeder
             'email' => 'user@gmail.com',
             'role' => 'user',
         ]);
-
-
-
-        // Tambahkan data pengguna tambahan lainnya sesuai kebutuhan
     }
 }

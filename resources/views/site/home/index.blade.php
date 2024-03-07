@@ -1,15 +1,15 @@
 @extends('site.layouts.main')
 
 @section('title')
-    <!-- Title here -->
+<!-- Title here -->
 @endsection
 
 @section('extra-css')
-    <!-- Additional CSS here -->
+<!-- Additional CSS here -->
 @endsection
 
 @section('extra-styles')
-    <!-- Additional styles here -->
+<!-- Additional styles here -->
 @endsection
 
 @section('content')
@@ -97,23 +97,26 @@
             <div class="col">
                 <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
                     @foreach($products as $product)
-                        <div class="product-item {{ $product->product_category_id }}">
-                            <div class="product product_filter">
-                                <div class="product_image">
-                                   @foreach ($product->productImage as $productImage)
-                                       <img src="{{ asset($productImage['url']);}}" alt="">
-                                   @endforeach
-                                </div>
-                                <div class="favorite"></div>
-                                <div class="product_info">
-                                    <h6 class="product_name"><a href="{{ route('site.produk.getIndex', $product->id) }}">{{ $product->name }}</a></h6>
-                                    <div class="product_price">${{ $product->price }}</div>
-                                </div>
+                    <div class="product-item {{ $product->product_category_id }} text-right">
+                        <div class="product product_filter">
+                            <div class="product_image">
+                                @if ($product->productImage->isNotEmpty())
+                                <!-- Menampilkan hanya satu gambar dari koleksi gambar -->
+                                <img src="{{ asset($product->productImage->first()['url']) }}" alt="{{ $product->name }}">
+                                @endif
                             </div>
-                            <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                            <div class="favorite"></div>
+                            <div class="product_info">
+                                <h6 class="product_name"><a href="{{ route('site.produk.getIndex', $product->id) }}">{{ $product->name }}</a></h6>
+                                <div class="product_price">${{ $product->price }}</div>
+                            </div>
                         </div>
+                        <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                    </div>
                     @endforeach
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -122,35 +125,37 @@
 @endsection
 
 @section('extra-content')
-    <!-- Additional content here -->
+<!-- Additional content here -->
 @endsection
 
 @section('extra-js')
-    <!-- Additional JavaScript here -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            var $grid = $('.product-grid').isotope({
-                itemSelector: '.product-item',
-                layoutMode: 'fitRows'
-            });
-
-            $('.filters-button-group li').on('click', function() {
-                var filterValue = $(this).attr('data-filter');
-                $grid.isotope({ filter: filterValue });
-
-                $('.filters-button-group li').removeClass('active');
-                $(this).addClass('active');
-            });
+<!-- Additional JavaScript here -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var $grid = $('.product-grid').isotope({
+            itemSelector: '.product-item',
+            layoutMode: 'fitRows'
         });
 
-        setTimeout(function(){
-                document.getElementById('welcomeMessage').style.display = 'none';
-            }, 5000);
-    </script>
+        $('.filters-button-group li').on('click', function() {
+            var filterValue = $(this).attr('data-filter');
+            $grid.isotope({
+                filter: filterValue
+            });
+
+            $('.filters-button-group li').removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+
+    setTimeout(function() {
+        document.getElementById('welcomeMessage').style.display = 'none';
+    }, 5000);
+</script>
 @endsection
 
 @section('extra-script')
-    <!-- Additional script here -->
+<!-- Additional script here -->
 @endsection
