@@ -30,7 +30,5 @@ class ProductSeeder extends Seeder
             'stock' => 2,
             'status' => 'tersedia',
         ]);
-
-        // Tambahkan produk lain jika diperlukan
     }
 }

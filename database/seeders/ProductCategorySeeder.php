@@ -19,7 +19,6 @@ class ProductCategorySeeder extends Seeder
         ]);
         DB::table('product_categories')->insert([
             'name' => 'Pants',
-
         ]);
     }
 }
