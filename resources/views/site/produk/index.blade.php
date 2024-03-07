@@ -88,64 +88,29 @@
     <div class="row">
         <div class="col-lg-7">
             <div class="single_product_pics">
-               <div class="row">
-                   <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
-                       <div class="single_product_thumbnails">
-                           <ul>
-                               @foreach ($products->productImage as $index => $productImage)
-                                   <li class="{{ $index < 3 ? 'active' : '' }}">
-                                       <img src="{{ asset($productImage['url']) }}" alt="{{ $products->name }}" data-image="{{ asset($productImage['url']) }}" onclick="changeBackgroundImage(this)">
-                                   </li>
-                               @endforeach
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-9 image_col order-lg-2 order-1">
-                       <div class="single_product_image">
-                           <!-- Display the selected image -->
-                           <div id="selected_image" class="single_product_image_background" style="background-image:url({{ asset($products->productImage->first()['url']) }})"></div>
-                       </div>
-                   </div>
-               </div>
-
-
-            </div>
-        </div>
-
-        <div class="col-lg-5">
-            <div class="product_details">
-                <div class="product_details_title">
-                    <h2>{{$products->name}}</h2>
-                    <p>{{$products->description}}</p>
-                </div>
-                <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
-                    <span class="ti-truck"></span><span>free delivery</span>
-                </div>
-                <div class="original_price">${{ $products->price }}</div>
-                <div class="product_price">${{ $products->price }}</div>
-                <ul class="star_rating">
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                </ul>
-                <div class="product_color">
-                    <span>stok: {{$products->stock}}</span>
-                </div>
-                <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-                    <span>Quantity:</span>
-                    <div class="quantity_selector">
-                        <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                        <span id="quantity_value">1</span>
-                        <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                <div class="row">
+                    <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+                        <div class="single_product_thumbnails">
+                            <ul>
+                                @foreach ($products->productImage as $index => $productImage)
+                                    <li class="{{ $index == 0 ? 'active' : '' }}">
+                                        <img src="{{ asset($productImage['url']) }}" alt="" data-image="{{ asset($productImage->first()['url']) }}">
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                    <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                    <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+                    <div class="col-lg-9 image_col order-lg-2 order-1">
+                        <div class="single_product_image">
+                            <!-- Display the selected image -->
+                            <div class="single_product_image_background" style="background-image:url({{ asset($productImage->first()['url']) }})"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+
 
 
 </div>
@@ -363,30 +328,28 @@
 
 @section('extra-js')
 <!-- start here -->
-<script>
-function initThumbnail()
-	{
-		if($('.single_product_thumbnails ul li').length)
-		{
-			var thumbs = $('.single_product_thumbnails ul li');
-			var singleImage = $('.single_product_image_background');
 
-			thumbs.each(function()
-			{
-				var item = $(this);
-				item.on('click', function()
-				{
-					thumbs.removeClass('active');
-					item.addClass('active');
-					var img = item.find('img').data('image');
-					singleImage.css('background-image', 'url(' + img + ')');
-				});
-			});
-		}
-	}
-</script>
 @endsection
 
 @section('extra-script')
-<!-- start here -->
+<script>
+    // Tambahkan script untuk mengganti gambar saat mengklik thumbnail
+    document.addEventListener("DOMContentLoaded", function () {
+        const thumbnails = document.querySelectorAll('.single_product_thumbnails ul li img');
+        const mainImage = document.querySelector('.single_product_image_background');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function () {
+                // Dapatkan URL gambar dari atribut data-image
+                const imageUrl = this.getAttribute('data-image');
+                // Atur sumber gambar utama
+                mainImage.style.backgroundImage = 'url(' + imageUrl + ')';
+                // Hapus kelas 'active' dari semua thumbnail
+                thumbnails.forEach(item => item.classList.remove('active'));
+                // Tambahkan kelas 'active' ke thumbnail yang diklik
+                this.parentNode.classList.add('active');
+            });
+        });
+    });
+    </script>
 @endsection
