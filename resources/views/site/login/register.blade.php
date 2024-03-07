@@ -72,25 +72,9 @@
                         </span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Nomor is required">
-                        {{-- nomor --}}
-                        <label for="nomor"></label>
-                        <input id="nomor" class="input100" type="text" name="nomor" placeholder="Nomor" required>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                        </span>
-                    </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        {{-- password --}}
-                        <label for="password"></label>
-                        <input id="password" class="input100" type="password" name="password" placeholder="Password" required>
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                        </span>
-                    </div>
+
+
 
                     <div class="wrap-input100 validate-input" data-validate="Role is required">
                         {{-- role --}}
