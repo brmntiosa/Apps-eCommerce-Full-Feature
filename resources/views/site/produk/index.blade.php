@@ -88,39 +88,27 @@
     <div class="row">
         <div class="col-lg-7">
             <div class="single_product_pics">
-                <div class="row">
-                    <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
-                        <div class="single_product_thumbnails">
+               <div class="row">
+                   <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+                       <div class="single_product_thumbnails">
+                           <ul>
+                               @foreach ($products->productImage as $index => $productImage)
+                                   <li class="{{ $index < 3 ? 'active' : '' }}">
+                                       <img src="{{ asset($productImage['url']) }}" alt="{{ $products->name }}" data-image="{{ asset($productImage['url']) }}" onclick="changeBackgroundImage(this)">
+                                   </li>
+                               @endforeach
+                           </ul>
+                       </div>
+                   </div>
+                   <div class="col-lg-9 image_col order-lg-2 order-1">
+                       <div class="single_product_image">
+                           <!-- Display the selected image -->
+                           <div id="selected_image" class="single_product_image_background" style="background-image:url({{ asset($products->productImage->first()['url']) }})"></div>
+                       </div>
+                   </div>
+               </div>
 
 
-                            {{-- <ul class="thumbnails_list">
-                                @foreach ($products->productImage as $index => $productImage)
-                                    <li class="{{ $index < 3 ? 'active' : '' }}">
-                                        <img src="{{ asset($productImage['url']) }}" alt="{{ $products->name }}" onclick="changeBackgroundImage('{{ asset($productImage['url']) }}')">
-                                    </li>
-                                @endforeach
-                            </ul> --}}
-
-                          <ul>
-                              @foreach ($products->productImage as $index => $productImage)
-                              <li class="{{ $index < 3 ? 'active' : '' }}">
-                                  <img src="{{ asset($productImage['url']) }}" alt="{{ $products->name }}" data-image="{{ asset($productImage['url']) }}" onclick="changeBackgroundImage('{{ asset($productImage['url']) }}')">
-                              </li>
-                              @endforeach
-
-                          </ul>
-
-
-                        </div>
-                    </div>
-                    <div class="col-lg-9 image_col order-lg-2 order-1">
-                        <div class="single_product_image">
-                            <!-- Display the selected image -->
-
-                            <div class="single_product_image_background" style="background-image:url({{ asset($productImage['url']) }})"></div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -376,25 +364,26 @@
 @section('extra-js')
 <!-- start here -->
 <script>
+function initThumbnail()
+	{
+		if($('.single_product_thumbnails ul li').length)
+		{
+			var thumbs = $('.single_product_thumbnails ul li');
+			var singleImage = $('.single_product_image_background');
 
-    function changeBackgroundImage(url) {
-        document.getElementById('productImageBackground').style.backgroundImage = "url('" + url + "')";
-    }
-
-    // Tambahkan script untuk mengganti gambar saat mengklik thumbnail
-    document.addEventListener("DOMContentLoaded", function () {
-        const thumbnails = document.querySelectorAll('.single_product_thumbnails ul li img');
-        const mainImage = document.querySelector('.single_product_image_background');
-
-        thumbnails.forEach(thumbnail => {
-            thumbnail.addEventListener('click', function () {
-                const imageUrl = this.getAttribute('src');
-                mainImage.style.backgroundImage = 'url(' + imageUrl + ')';
-                thumbnails.forEach(item => item.classList.remove('active'));
-                this.parentNode.classList.add('active');
-            });
-        });
-    });
+			thumbs.each(function()
+			{
+				var item = $(this);
+				item.on('click', function()
+				{
+					thumbs.removeClass('active');
+					item.addClass('active');
+					var img = item.find('img').data('image');
+					singleImage.css('background-image', 'url(' + img + ')');
+				});
+			});
+		}
+	}
 </script>
 @endsection
 
