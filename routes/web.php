@@ -5,6 +5,7 @@ use App\Http\Controllers\Site\SessionController;
 use App\Http\Controllers\Site\AdminController;
 use App\Http\Controllers\Site\HomeController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,9 +39,9 @@ Route::get('/sesi', function () {
 
 
 
+Route::get('/produk/{id}', [HomeController::class, 'show'])->name('site.produk.getIndex');
 Route::middleware(['auth'])->group(function () {
 
 
-    Route::get('/produk/{id}', 'App\Http\Controllers\Site\ProdukController@getIndex')->name('site.produk.getIndex');
 });
 

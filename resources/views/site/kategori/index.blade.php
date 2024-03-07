@@ -119,36 +119,36 @@
                                     <!-- Product Grid -->
 
                                     <div class="product-grid">
-                                        @foreach($produks as $produk)
-                                            <div class="product-item {{ $produk->kategori }}">
+                                        @foreach($products as $product)
+                                            <div class="product-item {{ $product->kategori }}">
                                                 <div class="product product_filter">
                                                     <div class="product_image">
-                                                        @if(!empty($produk->gambar1))
-                                                            <img src="{{ asset($produk->gambar1) }}" alt="{{ $produk->nama }}">
-                                                        @elseif(!empty($produk->gambar2))
-                                                            <img src="{{ asset($produk->gambar2) }}" alt="{{ $produk->nama }}">
-                                                        @elseif(!empty($produk->gambar3))
-                                                            <img src="{{ asset($produk->gambar3) }}" alt="{{ $produk->nama }}">
-                                                        @elseif(!empty($produk->gambar4))
-                                                            <img src="{{ asset($produk->gambar4) }}" alt="{{ $produk->nama }}">
-                                                        @elseif(!empty($produk->gambar5))
-                                                            <img src="{{ asset($produk->gambar5) }}" alt="{{ $produk->nama }}">
-                                                        @elseif(!empty($produk->gambar6))
-                                                            <img src="{{ asset($produk->gambar6) }}" alt="{{ $produk->nama }}">
-                                                        @elseif(!empty($produk->gambar7))
-                                                            <img src="{{ asset($produk->gambar7) }}" alt="{{ $produk->nama }}">
-                                                        @elseif(!empty($produk->gambar8))
-                                                            <img src="{{ asset($produk->gambar8) }}" alt="{{ $produk->nama }}">
-                                                        @elseif(!empty($produk->gambar9))
-                                                            <img src="{{ asset($produk->gambar9) }}" alt="{{ $produk->nama }}">
-                                                        @elseif(!empty($produk->gambar10))
-                                                            <img src="{{ asset($produk->gambar10) }}" alt="{{ $produk->nama }}">
+                                                        @if(!empty($product->gambar1))
+                                                            <img src="{{ asset($product->gambar1) }}" alt="{{ $product->nama }}">
+                                                        @elseif(!empty($product->gambar2))
+                                                            <img src="{{ asset($product->gambar2) }}" alt="{{ $product->nama }}">
+                                                        @elseif(!empty($product->gambar3))
+                                                            <img src="{{ asset($product->gambar3) }}" alt="{{ $product->nama }}">
+                                                        @elseif(!empty($product->gambar4))
+                                                            <img src="{{ asset($product->gambar4) }}" alt="{{ $product->nama }}">
+                                                        @elseif(!empty($product->gambar5))
+                                                            <img src="{{ asset($product->gambar5) }}" alt="{{ $product->nama }}">
+                                                        @elseif(!empty($product->gambar6))
+                                                            <img src="{{ asset($product->gambar6) }}" alt="{{ $product->nama }}">
+                                                        @elseif(!empty($product->gambar7))
+                                                            <img src="{{ asset($product->gambar7) }}" alt="{{ $product->nama }}">
+                                                        @elseif(!empty($product->gambar8))
+                                                            <img src="{{ asset($product->gambar8) }}" alt="{{ $product->nama }}">
+                                                        @elseif(!empty($product->gambar9))
+                                                            <img src="{{ asset($product->gambar9) }}" alt="{{ $product->nama }}">
+                                                        @elseif(!empty($product->gambar10))
+                                                            <img src="{{ asset($product->gambar10) }}" alt="{{ $product->nama }}">
                                                         @endif
                                                     </div>
                                                     <div class="favorite"></div>
                                                     <div class="product_info">
-                                                        <h6 class="product_name"><a href="{{ route('site.produk.getIndex', $produk->id) }}">{{ $produk->nama }}</a></h6>
-                                                        <div class="product_price">${{ $produk->harga }}<span>$590.00</span></div>
+                                                        <h6 class="product_name"><a href="{{ route('site.produk.getIndex', $product->id) }}">{{ $product->nama }}</a></h6>
+                                                        <div class="product_price">${{ $product->harga }}<span>$590.00</span></div>
                                                     </div>
                                                 </div>
                                                 <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
