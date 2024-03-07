@@ -14,7 +14,7 @@ class ProductImagesSeeder extends Seeder
     {
         $products = Product::all();
         foreach ($products as $product) {
-            $randomNumber = rand(1, 7);
+            $randomNumber = rand(1, 4);
             for ($i = 0; $i < $randomNumber; $i++) {
                 ProductImage::create([
                     'product_id' => $product->id,
