@@ -95,24 +95,26 @@
             <div class="col">
                 <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
                     @foreach($products as $product)
-                    <div class="product-item {{ $product->product_category_id }} text-right">
-                        <div class="product product_filter">
-                            <div class="product_image">
-                                @if ($product->productImage->isNotEmpty())
-                                <!-- Menampilkan hanya satu gambar dari koleksi gambar -->
-                                <img src="{{ asset($product->productImage->first()['url']) }}" alt="{{ $product->name }}">
-                                @endif
+                        <div class="product-item {{ $product->product_category_id }} text-right">
+                            <div class="product product_filter">
+                                <div class="product_image">
+                                    @if ($product->productImage->isNotEmpty())
+                                        <img src="{{ asset($product->productImage->first()['url']) }}" alt="{{ $product->name }}">
+                                    @endif
+                                </div>
+                                <div class="favorite"></div>
+                                <div class="product_info">
+                                    <h6 class="product_name"><a href="{{ route('site.produk.getIndex', $product->id) }}">{{ $product->name }}</a></h6>
+                                    <div class="product_price">${{ $product->price }}</div>
+                                </div>
                             </div>
-                            <div class="favorite"></div>
-                            <div class="product_info">
-                                <h6 class="product_name"><a href="{{ route('site.produk.getIndex', $product->id) }}">{{ $product->name }}</a></h6>
-                                <div class="product_price">${{ $product->price }}</div>
-                            </div>
+                            <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
                         </div>
-                        <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                    </div>
+
+
                     @endforeach
                 </div>
+
 
 
             </div>
