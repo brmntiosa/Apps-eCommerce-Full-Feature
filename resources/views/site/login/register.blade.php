@@ -46,7 +46,7 @@
                     <img src="{{ asset('global/login/Login_v1/images/img-01.png') }}" alt="IMG">
                 </div>
 
-                <form class="login100-form validate-form" method="POST" action="/sesi/create">
+                <form class="login100-form validate-form" method="POST" action="">
                     @csrf
                     <span class="login100-form-title">
                         Register
