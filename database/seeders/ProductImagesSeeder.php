@@ -13,7 +13,6 @@ class ProductImagesSeeder extends Seeder
     public function run()
     {
         $products = Product::all();
-
         foreach ($products as $product) {
             $randomNumber = rand(1, 7);
             for ($i = 0; $i < $randomNumber; $i++) {

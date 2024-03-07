@@ -15,10 +15,15 @@ class ProductCategorySeeder extends Seeder
     {
         DB::table('product_categories')->insert([
             'name' => 'T Shirt',
-
         ]);
         DB::table('product_categories')->insert([
             'name' => 'Pants',
+        ]);
+        DB::table('product_categories')->insert([
+            'name' => 'Accessories',
+        ]);
+        DB::table('product_categories')->insert([
+            'name' => 'Shoes',
         ]);
     }
 }

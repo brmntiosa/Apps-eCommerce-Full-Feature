@@ -32,7 +32,7 @@ Route::get('/home', 'App\Http\Controllers\Site\HomeController@getIndex')->name('
 Route::get('/sesi', function () {
     return redirect('/login');
 });
-
+Route::get('/produk/{id}', 'App\Http\Controllers\Site\ProdukController@getIndex')->name('site.produk.getIndex');
 // Route::get('/', 'App\Http\Controllers\Site\HomeController@getIndex')->name('site.home.getIndex');
 
 // Route::post('/login', 'App\Http\Controllers\Site\LoginController@post')->name('site.login.post');
@@ -41,7 +41,4 @@ Route::get('/sesi', function () {
 
 Route::get('/produk/{id}', [HomeController::class, 'show'])->name('site.produk.getIndex');
 Route::middleware(['auth'])->group(function () {
-
-
 });
-

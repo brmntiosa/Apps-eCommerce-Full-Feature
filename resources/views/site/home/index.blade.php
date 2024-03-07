@@ -49,7 +49,6 @@
                 function closeNotification() {
                     document.getElementById('notification').style.display = 'none';
                 }
-
                 // Tampilkan pemberitahuan setelah halaman dimuat
                 document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('notification').style.display = 'block';
@@ -57,7 +56,6 @@
             </script>
         </div>
     </div>
-
 
 
     @endauth
