@@ -7,6 +7,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <meta charset="utf-8">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/styles/bootstrap4/bootstrap.min.css">
+
+      <!-- Font Awesome CSS -->
+      <link href="{{asset('global/landingpage')}}/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+      <!-- Owl Carousel CSS -->
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/plugins/OwlCarousel2-2.2.1/animate.css">
+
+      <!-- Main Styles CSS -->
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/styles/main_styles.css">
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/styles/responsive.css">
+
+      <!-- Themify Icons CSS -->
+      <link rel="stylesheet" href="{{asset('global/landingpage')}}/plugins/themify-icons/themify-icons.css">
+
+      <!-- jQuery UI CSS -->
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+
+      <!-- Single Styles CSS -->
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/styles/single_styles.css">
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/styles/single_responsive.css">
+
+      {{-- Kategori Styles CSS --}}
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/styles/categories_styles.css">
+      <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/styles/categories_responsive.css">
     <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/styles/bootstrap4/bootstrap.min.css">
     <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -26,6 +55,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/styles/single_responsive.css">
 
     {{-- kategori --}}
+
     <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/styles/bootstrap4/bootstrap.min.css">
     <link href="{{asset('global/landingpage')}}/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{asset('global/landingpage')}}/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
