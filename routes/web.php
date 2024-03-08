@@ -24,6 +24,7 @@ Route::get('/sesi/register', [SessionController::class, 'register']);
 Route::post('/sesi/create', [SessionController::class, 'create']);
 Route::get('/sesi/logout', [SessionController::class, 'logout'])->name('logout')->middleware('auth');
 
+Route::get('/kategori/search', 'App\Http\Controllers\Site\KategoriController@getIndex')->name('site.kategori.searchByName');
 
 Route::get('/kategori', 'App\Http\Controllers\Site\KategoriController@getIndex')->name('site.kategori.getIndex');
 

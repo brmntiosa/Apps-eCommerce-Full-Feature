@@ -88,25 +88,25 @@
     <div class="row">
         <div class="col-lg-7">
             <div class="single_product_pics">
-               <div class="row">
-                   <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
-                       <div class="single_product_thumbnails">
-                           <ul>
-                               @foreach ($products->productImage as $index => $productImage)
-                                   <li class="{{ $index < 3 ? 'active' : '' }}">
-                                       <img src="{{ asset($productImage['url']) }}" alt="{{ $products->name }}" data-image="{{ asset($productImage['url']) }}" onclick="changeBackgroundImage(this)">
-                                   </li>
-                               @endforeach
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-9 image_col order-lg-2 order-1">
-                       <div class="single_product_image">
-                           <!-- Display the selected image -->
-                           <div id="selected_image" class="single_product_image_background" style="background-image:url({{ asset($products->productImage->first()['url']) }})"></div>
-                       </div>
-                   </div>
-               </div>
+                <div class="row">
+                    <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+                        <div class="single_product_thumbnails">
+                            <ul>
+                                @foreach ($products->productImage as $index => $productImage)
+                                <li class="{{ $index < 3 ? 'active' : '' }}">
+                                    <img src="{{ asset($productImage['url']) }}" alt="{{ $products->name }}" data-image="{{ asset($productImage['url']) }}" onclick="changeBackgroundImage(this)">
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 image_col order-lg-2 order-1">
+                        <div class="single_product_image">
+                            <!-- Display the selected image -->
+                            <div id="selected_image" class="single_product_image_background" style="background-image:url({{ asset($products->productImage->first()['url']) }})"></div>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
@@ -171,36 +171,36 @@
 
                 <!-- Tab Description -->
 
-               <div id="tab_1" class="tab_container active">
-                   <div class="row">
-                       <div class="col-lg-5 desc_col">
-                           <div class="tab_title">
-                               <h4>Description</h4>
-                           </div>
-                           <div class="tab_text_block">
-                               <h2>{{$products->name}}</h2>
-                               <p>{{$products->description}}</p>
-                           </div>
-                           <div class="tab_image">
-                               @if($products->productImage->count() > 0)
-                                   <img src="{{ asset($products->productImage->get(0)['url']) }}" alt="{{ $products->name }}">
-                               @endif
-                           </div>
-                       </div>
-                       <div class="col-lg-5 offset-lg-2 desc_col">
-                           @if($products->productImage->count() > 1)
-                               <div class="tab_image">
-                                   <img src="{{ asset($products->productImage->get(1)['url']) }}" alt="{{ $products->name }}">
-                               </div>
-                           @endif
-                           @if($products->productImage->count() > 2)
-                               <div class="tab_image desc_last">
-                                   <img src="{{ asset($products->productImage->get(2)['url']) }}" alt="{{ $products->name }}">
-                               </div>
-                           @endif
-                       </div>
-                   </div>
-               </div>
+                <div id="tab_1" class="tab_container active">
+                    <div class="row">
+                        <div class="col-lg-5 desc_col">
+                            <div class="tab_title">
+                                <h4>Description</h4>
+                            </div>
+                            <div class="tab_text_block">
+                                <h2>{{$products->name}}</h2>
+                                <p>{{$products->description}}</p>
+                            </div>
+                            <div class="tab_image">
+                                @if($products->productImage->count() > 0)
+                                <img src="{{ asset($products->productImage->get(0)['url']) }}" alt="{{ $products->name }}">
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-lg-5 offset-lg-2 desc_col">
+                            @if($products->productImage->count() > 1)
+                            <div class="tab_image">
+                                <img src="{{ asset($products->productImage->get(1)['url']) }}" alt="{{ $products->name }}">
+                            </div>
+                            @endif
+                            @if($products->productImage->count() > 2)
+                            <div class="tab_image desc_last">
+                                <img src="{{ asset($products->productImage->get(2)['url']) }}" alt="{{ $products->name }}">
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
                 <!-- Tab Additional Info -->
 
                 <div id="tab_2" class="tab_container">
@@ -364,26 +364,22 @@
 @section('extra-js')
 <!-- start here -->
 <script>
-function initThumbnail()
-	{
-		if($('.single_product_thumbnails ul li').length)
-		{
-			var thumbs = $('.single_product_thumbnails ul li');
-			var singleImage = $('.single_product_image_background');
+    function initThumbnail() {
+        if ($('.single_product_thumbnails ul li').length) {
+            var thumbs = $('.single_product_thumbnails ul li');
+            var singleImage = $('.single_product_image_background');
 
-			thumbs.each(function()
-			{
-				var item = $(this);
-				item.on('click', function()
-				{
-					thumbs.removeClass('active');
-					item.addClass('active');
-					var img = item.find('img').data('image');
-					singleImage.css('background-image', 'url(' + img + ')');
-				});
-			});
-		}
-	}
+            thumbs.each(function() {
+                var item = $(this);
+                item.on('click', function() {
+                    thumbs.removeClass('active');
+                    item.addClass('active');
+                    var img = item.find('img').data('image');
+                    singleImage.css('background-image', 'url(' + img + ')');
+                });
+            });
+        }
+    }
 </script>
 @endsection
 
