@@ -23,6 +23,11 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
+    protected $routeMiddleware = [
+        // ...
+        'custom.login' => \App\Http\Middleware\CustomLoginMiddleware::class,
+    ];
+
     /**
      * The application's route middleware groups.
      *
