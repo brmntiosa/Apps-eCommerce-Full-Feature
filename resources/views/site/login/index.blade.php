@@ -58,6 +58,17 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <div class="login100-pic js-tilt" data-tilt>
+
+                    @if($errors->any())
+                    @foreach($errors->all() as $error)
+                    <p style="color:red;">{{ $error }}</p>
+                    @endforeach
+                @endif
+
+                @if(Session::has('error'))
+                    <p style="color:red;">{{ Session::get('error') }}</p>
+                @endif
+{{-- Modify --}}
                     @if($errors->any())
                     <div class="alert-container" id="danger-alert">
                         <span class="close-btn" onclick="closeAlert()">&times;</span>
@@ -69,7 +80,7 @@
                     <img src="{{ asset('global/login/Login_v1/images/img-01.png') }}" alt="IMG">
                 </div>
 
-                <form class="login100-form validate-form" method="POST" action="/sesi/login">
+                <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
                     @csrf
                     <span class="login100-form-title">
                         Member Login

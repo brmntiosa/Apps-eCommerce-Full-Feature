@@ -31,6 +31,12 @@
 </style>
 </head>
 <body>
+    @if($errors->any())
+    @foreach($errors->all() as $error)
+    <p style="color:red;">{{ $error }}</p>
+    @endforeach
+@endif
+
     <div class="limiter">
         <div class="container-login100">
 
@@ -46,7 +52,7 @@
                     <img src="{{ asset('global/login/Login_v1/images/img-01.png') }}" alt="IMG">
                 </div>
 
-                <form class="login100-form validate-form" method="POST" action="">
+                <form class="login100-form validate-form" method="POST" action="{{ route('studentRegister') }}">
                     @csrf
                     <span class="login100-form-title">
                         Register
