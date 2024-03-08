@@ -3,14 +3,24 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; // Import kelas Request
 use App\Models\Product;
+use App\Models\ProductCategory;
 
 class KategoriController extends Controller
 {
-    public function getIndex(){
+    public function getIndex(Request $request) // Tambahkan parameter $request di sini
+    {
+        $searchTerm = $request->input('search');
+        $categories = ProductCategory::orderBy('name')->get();
 
-        $products = Product::all();
-        return view('site.kategori.index', ['products' => $products]);
+        // Periksa apakah ada pencarian atau tidak
+        if ($searchTerm) {
+            $products = Product::where('name', 'like', '%' . $searchTerm . '%')->get();
+        } else {
+            $products = Product::all();
+        }
+
+        return view('site.kategori.index', ['categories' => $categories, 'products' => $products]);
     }
 }

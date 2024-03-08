@@ -13,6 +13,4 @@ class ProdukController extends Controller
         $products = Product::with('productImage')->get();
         return view('site.produk.index', ['products' => $products]);
     }
-
-
 }
