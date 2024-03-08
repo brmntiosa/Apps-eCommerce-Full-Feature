@@ -93,11 +93,9 @@
                         <div class="single_product_thumbnails">
                             <ul>
                                 @foreach ($products->productImage as $index => $productImage)
-
-                                <li class="{{ $index < 3 ? 'active' : '' }}">
-                                    <img src="{{ asset($productImage['url']) }}" alt="{{ $products->name }}" data-image="{{ asset($productImage['url']) }}" onclick="changeBackgroundImage(this)">
-                                </li>
-
+                                    <li class="{{ $index === 0 ? 'active' : '' }}">
+                                        <img src="{{ asset($productImage->url) }}" alt="{{ $products->name }}" data-image="{{ asset($productImage->url) }}" onclick="changeBackgroundImage(this, '{{ $productImage->url }}')">
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -105,7 +103,7 @@
                     <div class="col-lg-9 image_col order-lg-2 order-1">
                         <div class="single_product_image">
                             <!-- Display the selected image -->
-                            <div id="selected_image" class="single_product_image_background" style="background-image:url({{ asset($products->productImage->first()['url']) }})"></div>
+                            <div id="selected_image" class="single_product_image_background" style="background-image:url({{ asset($products->productImage[0]->url) }})"></div>
                         </div>
                     </div>
                 </div>
@@ -113,6 +111,34 @@
 
             </div>
         </div>
+        {{-- {{dd($products)}} --}}
+        <script>
+            function initThumbnail() {
+                if ($(".single_product_thumbnails ul li").length) {
+                    var thumbs = $(".single_product_thumbnails ul li");
+                    var singleImage = $("#selected_image");
+
+                    thumbs.each(function () {
+                        var item = $(this);
+                        item.on("click", function () {
+                            thumbs.removeClass("active");
+                            item.addClass("active");
+                            var img = item.find("img").data("image");
+                            singleImage.css("background-image", "url(" + img + ")");
+                        });
+                    });
+                }
+            }
+
+            // Fungsi ini akan dipanggil ketika thumbnail di klik
+            function changeBackgroundImage(element, imgUrl) {
+                console.log("Image clicked. URL: ", imgUrl);
+                $("#selected_image").css("background-image", "url(" + imgUrl + ")");
+            }
+
+            // Panggil fungsi inisialisasi
+            initThumbnail();
+        </script>
 
         <div class="col-lg-5">
             <div class="product_details">
@@ -145,6 +171,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
 
 
@@ -364,24 +391,7 @@
 
 @section('extra-js')
 <!-- start here -->
-<script>
-    function initThumbnail() {
-        if ($('.single_product_thumbnails ul li').length) {
-            var thumbs = $('.single_product_thumbnails ul li');
-            var singleImage = $('.single_product_image_background');
 
-            thumbs.each(function() {
-                var item = $(this);
-                item.on('click', function() {
-                    thumbs.removeClass('active');
-                    item.addClass('active');
-                    var img = item.find('img').data('image');
-                    singleImage.css('background-image', 'url(' + img + ')');
-                });
-            });
-        }
-    }
-</script>
 @endsection
 
 @section('extra-script')
