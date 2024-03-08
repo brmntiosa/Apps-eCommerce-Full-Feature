@@ -93,9 +93,11 @@
                         <div class="single_product_thumbnails">
                             <ul>
                                 @foreach ($products->productImage as $index => $productImage)
+
                                 <li class="{{ $index < 3 ? 'active' : '' }}">
                                     <img src="{{ asset($productImage['url']) }}" alt="{{ $products->name }}" data-image="{{ asset($productImage['url']) }}" onclick="changeBackgroundImage(this)">
                                 </li>
+
                                 @endforeach
                             </ul>
                         </div>
@@ -140,12 +142,11 @@
                         <span id="quantity_value">1</span>
                         <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
                     </div>
-                    <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                    <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
                 </div>
             </div>
         </div>
-    </div>
+
+
 
 
 </div>
@@ -386,3 +387,4 @@
 @section('extra-script')
 <!-- start here -->
 @endsection
+
