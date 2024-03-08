@@ -48,7 +48,9 @@ Route::group(['middleware' => 'custom.login'], function () {
 });
 
 
+Route::get('/kategori/search', 'App\Http\Controllers\Site\KategoriController@getIndex')->name('site.kategori.searchByName');
 //////////////////////////////////////////////////
+
 // Route::get('/login', [AuthController::class, 'get_login'])->name('login');
 // Route::get('/register', [AuthController::class, 'get_register'])->name('register');
 // Route::post('/login', [AuthController::class, 'post_login']);
@@ -61,6 +63,7 @@ Route::group(['middleware' => 'custom.login'], function () {
 // });
 // Route::get('/home', 'App\Http\Controllers\Site\HomeController@getIndex')->name('site.home.getIndex');
 /////////////////////////////////////////////////
+
 
 // Route::post('/sesi/create', [SessionController::class, 'create']);
 Route::get('/sesi/logout', [SessionController::class, 'logout'])->name('logout')->middleware('auth');
