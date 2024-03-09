@@ -6,6 +6,39 @@
 
 @section('extra-css')
 <!-- Additional CSS here -->
+
+<style>
+    .wishlist_icon {
+        position: absolute;
+        bottom: 30px;
+        transform: translateX(10%) translateY(10%);
+        right: 0;
+        left: 20px;
+        margin: 10px;
+        /* Sesuaikan dengan jarak dari tepi pojok kanan bawah */
+        color: #ff0000;
+        /* Sesuaikan dengan warna ikon yang diinginkan */
+        cursor: pointer;
+        /* Menambahkan cursor pointer untuk menunjukkan elemen dapat di-klik */
+    }
+
+    .wishlist_icon i {
+        font-size: 18px;
+        /* Sesuaikan dengan ukuran ikon yang diinginkan */
+    }
+
+    .wishlist-popup {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        z-index: 1000;
+    }
+</style>
+
 @endsection
 
 @section('extra-styles')
@@ -95,35 +128,61 @@
             <div class="col">
                 <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
                     @foreach($products as $product)
-                        <div class="product-item {{ $product->product_category_id }} text-right">
-                            <div class="product product_filter">
-                                <div class="product_image">
-                                    @if ($product->productImage->isNotEmpty())
-                                        <img src="{{ asset($product->productImage->first()['url']) }}" alt="{{ $product->name }}">
-                                    @endif
-                                </div>
-                                <div class="favorite"></div>
-                                <div class="product_info">
-                                    <h6 class="product_name"><a href="{{ route('site.produk.getIndex', $product->id) }}">{{ $product->name }}</a></h6>
-                                    <div class="product_price">${{ $product->price }}</div>
+                    <div class="product-item {{ $product->product_category_id }} text-right ">
+                        <div class="product product_filter">
+                            <div class="product_image">
+                                @if ($product->productImage->isNotEmpty())
+                                <img src=" {{ asset($product->productImage->first()['url']) }}" alt="{{ $product->name }}">
+                                @endif
+                            </div>
+                            <div class="product_info">
+                                <h6 class="product_name"><a href="{{ route('site.produk.getIndex', $product->id) }}">{{ $product->name }}</a></h6>
+                                <div class="product_price">${{ $product->price }}</div>
+                                <div class="wishlist_icon">
                                 </div>
                             </div>
-                            <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
                         </div>
-
-
+                        <form action="{{ route('wishlist.add', ['product' => $product->id]) }}" method="post">
+                            @csrf
+                            <button type="submit" class="wishlist_button">
+                                <i class="bi bi-bag-heart-fill">
+                                    <a href="#" class="notify-link">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                                        </svg>
+                                    </a>
+                                </i>
+                            </button>
+                        </form>
+                    </div>
                     @endforeach
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // Menambahkan event listener untuk elemen dengan class 'notify-link'
+                            document.querySelectorAll('.notify-link').forEach(function(link) {
+                                link.addEventListener('click', function(event) {
+                                    event.preventDefault();
+                                    // Menunjukkan notifikasi ketika elemen diklik
+                                    showNotification('welcomeMessage');
+                                });
+                            });
+                        });
+
+                        function showNotification(message) {
+                            // Implementasikan logika untuk menampilkan notifikasi di sini
+                            console.log(message);
+                            // Contoh: Munculkan notifikasi menggunakan alert
+                            alert(message);
+                        }
+                    </script>
                 </div>
-
-
-
             </div>
-
-
-           </div>
-       </div>
+        </div>
     </div>
 </div>
+
+</div>
+
 
 @endsection
 
@@ -135,6 +194,10 @@
 <!-- Additional JavaScript here -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+
+<!-- Wishlist Pop Up -->
+
+
 <script>
     $(document).ready(function() {
         var $grid = $('.product-grid').isotope({

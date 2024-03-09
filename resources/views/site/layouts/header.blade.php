@@ -44,6 +44,7 @@
                         <ul class="navbar_menu">
                             <li><a href="/home">home</a></li>
                             <li><a href="{{route('site.kategori.getIndex')}}">Kategori</a></li>
+                            <li><a href="{{route('site.wishlist.index')}}">Wishlist</a></li>
                         </ul>
 
                         <div class="hamburger_container">
