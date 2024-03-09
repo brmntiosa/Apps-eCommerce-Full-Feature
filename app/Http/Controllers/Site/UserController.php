@@ -25,11 +25,13 @@ class UserController extends Controller
         $request->validate([
             'name' => 'string|required|min:2',
             'email' => 'string|email|required|max:100|unique:users',
+            'role' => 'string|in:user,admin', // Validasi role agar hanya user atau admin
         ]);
 
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role = $request->role; // Tambahkan baris ini untuk menyimpan role
         $user->save();
 
         return redirect("/verification/".$user->id);
@@ -68,27 +70,34 @@ class UserController extends Controller
     }
 
     public function userLogin(Request $request)
-    {
-        $request->validate([
-            'email' => 'required',
-        ]);
+{
+    $request->validate([
+        'email' => 'required',
+    ]);
 
-        $userData = User::where('email', $request->email)->first();
+    $userData = User::where('email', $request->email)->first();
 
-        if ($userData && $userData->is_verified == 0) {
-            $this->sendOtp($userData);
-            return redirect("/verification/" . $userData->id);
-        }
-
-        // Pastikan user yang diberikan ke Auth::login adalah instance Authenticatable
-        if ($userData instanceof \Illuminate\Contracts\Auth\Authenticatable) {
-            // Set custom data to the session
-            $request->session()->put('custom_login', true);
-            Auth::login($userData);
-        }
-
-        return redirect('/home');
+    if ($userData && $userData->is_verified == 0) {
+        $this->sendOtp($userData);
+        return redirect("/verification/" . $userData->id);
     }
+
+    // Pastikan user yang diberikan ke Auth::login adalah instance Authenticatable
+    if ($userData instanceof \Illuminate\Contracts\Auth\Authenticatable) {
+        // Set custom data to the session
+        $request->session()->put('custom_login', true);
+        Auth::login($userData);
+
+        // Cek peran pengguna setelah login
+        if ($userData->role == 'user') {
+            return redirect('/home');
+        } elseif ($userData->role == 'admin') {
+            return redirect('/admin');
+        }
+    }
+
+    return redirect('/home'); // Redirect default jika peran tidak dikenali
+}
 
     public function loadDashboard()
     {

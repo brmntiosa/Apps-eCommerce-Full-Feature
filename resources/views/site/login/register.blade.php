@@ -85,12 +85,16 @@
                     <div class="wrap-input100 validate-input" data-validate="Role is required">
                         {{-- role --}}
                         <label for="role"></label>
-                        <input id="role" class="input100" type="text" name="role" placeholder="Role" value="user" readonly required>
+                        <select id="role" class="input100" name="role" required>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                            <!-- Tambahkan opsi peran lainnya jika diperlukan -->
+                        </select>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
-                        <p style="font-size: 14px; margin-top: 10px; color: #777;">ini hanya default user</p>
+                        <p style="font-size: 14px; margin-top: 10px; color: #777;">Pilih peran pengguna</p>
                     </div>
 
                     <div class="container-login100-form-btn">
