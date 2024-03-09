@@ -42,11 +42,12 @@ Route::get('/resend-otp',[UserController::class,'resendOtp'])->name('resendOtp')
 Route::get('/home', [HomeController::class, 'getIndex'])->name('site.home.getIndex');
 Route::group(['middleware' => 'custom.login'], function () {
     Route::get('/dashboard',[UserController::class,'loadDashboard']);
-    // Rute-rute yang memerlukan custom login
 
 
 });
 
+
+Route::get('/admin', [AdminController::class, 'index'])->name('site.admin.getIndex');
 
 Route::get('/kategori/search', 'App\Http\Controllers\Site\KategoriController@getIndex')->name('site.kategori.searchByName');
 //////////////////////////////////////////////////
