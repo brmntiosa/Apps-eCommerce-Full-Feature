@@ -9,6 +9,8 @@ use App\Http\Controllers\Site\AuthController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\VerificationController;
 use App\Http\Controllers\Site\UserController;
+use App\Http\Controllers\Site\WishlistController;
+use App\Models\Wishlist;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,26 +28,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register',[UserController::class,'loadRegister']);
-Route::post('/register',[UserController::class,'studentRegister'])->name('studentRegister');
-Route::get('/login',function(){
+Route::get('/register', [UserController::class, 'loadRegister']);
+Route::post('/register', [UserController::class, 'studentRegister'])->name('studentRegister');
+Route::get('/login', function () {
     return redirect('/');
 });
-Route::get('/',[UserController::class,'loadLogin']);
-Route::post('/login',[UserController::class,'userLogin'])->name('userLogin');
-Route::post('/login',[UserController::class,'userLogin'])->name('login');
+Route::get('/', [UserController::class, 'loadLogin']);
+Route::post('/login', [UserController::class, 'userLogin'])->name('userLogin');
+Route::post('/login', [UserController::class, 'userLogin'])->name('login');
 
-Route::get('/verification/{id}',[UserController::class,'verification']);
-Route::post('/verified',[UserController::class,'verifiedOtp'])->name('verifiedOtp');
+Route::get('/verification/{id}', [UserController::class, 'verification']);
+Route::post('/verified', [UserController::class, 'verifiedOtp'])->name('verifiedOtp');
 
-Route::get('/resend-otp',[UserController::class,'resendOtp'])->name('resendOtp');
+Route::get('/resend-otp', [UserController::class, 'resendOtp'])->name('resendOtp');
+Route::get('/wishlist', [WishlistController::class, 'getIndex'])->name('site.wishlist.index');
+Route::post('/wishlist/add/{product}', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
 
 
 Route::get('/home', [HomeController::class, 'getIndex'])->name('site.home.getIndex');
 Route::group(['middleware' => 'custom.login'], function () {
-    Route::get('/dashboard',[UserController::class,'loadDashboard']);
-
-
+    Route::get('/dashboard', [UserController::class, 'loadDashboard']);
 });
 
 
