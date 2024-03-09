@@ -32,9 +32,25 @@ class AdminProductController extends Controller
     public function deleteProduct($id)
     {
         $product = Product::find($id);
+
+        // Hapus gambar terkait dengan produk
+        foreach ($product->productImage as $image) {
+            // Dapatkan path file gambar
+            $imagePath = public_path($image->url);
+
+            // Hapus file gambar secara manual
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+
+            // Hapus record gambar dari database
+            $image->delete();
+        }
+
+        // Hapus produk
         $product->delete();
 
-        return redirect()->route('site.admin.getProductIndex')->with('success', 'Product deleted successfully');
+        return redirect()->route('site.admin.getIndex')->with('success', 'Product deleted successfully');
     }
 
     public function updateProduct(Request $request, $id)

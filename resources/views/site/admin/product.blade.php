@@ -269,15 +269,59 @@
         .submenu a:hover {
             background: #eee;
         }
+        .alert {
+            position: relative;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .alert button.close {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .alert button.close:hover {
+            color: #155724;
+        }
+        .btnn {
+        display: inline-block;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .btnn:hover {
+        background-color: #45a049;
+    }
     </style>
 </head>
 <body>
     <div class="container">
         <nav>
+
+
             <ul>
                 <li>
                     <a href="#" class="logo">
-                        <img src="./pic/logo.jpg" alt="Logo">
+                        <img src="{{asset('global/landingpage/images')}}/adminlogo.png" alt="Logo">
                         <span class="nav-item">Admin</span>
                     </a>
                 </li>
@@ -313,15 +357,21 @@
         <section class="main">
             <div class="main-top">
                 <h1>Products</h1>
-                <i class="fas fa-shopping-bag"></i>
-            </div>
 
+                <i class="fas fa-shopping-bag"></i>
+
+            </div>
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+                <button class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+            </div>
+        @endif
             <section class="attendance">
                 <div class="attendance-list">
                     <h1>Product List</h1>
-                    <a href="{{ route('site.admin.addProduct') }}" class="btn">
-                        <button type="submit">Add Product</button></a>
 
+                    <a href="{{ route('site.admin.addProduct') }}" class="btnn">Add Product</a>
                     <table class="table">
                         <thead>
                             <tr>
