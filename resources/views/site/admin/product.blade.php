@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Attendance Dashboard | By Code Info</title>
-    <link rel="stylesheet" href="style.css" />
-    <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-GLhlTQ8i1I6TurfA6GvaqEF+TcRb7M/dfQFc8e9xHb6ZLl/3gy2IepER95F5jqFw" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
     <style>
         /* import google fonts */
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
@@ -315,26 +312,62 @@
 
         <section class="main">
             <div class="main-top">
-                <h1>Users</h1>
-                <i class="fas fa-user-cog"></i>
+                <h1>Products</h1>
+                <i class="fas fa-shopping-bag"></i>
             </div>
-
 
             <section class="attendance">
                 <div class="attendance-list">
-                    <h1>Halaman Dasboars</h1>
+                    <h1>Product List</h1>
+                    <a href="{{ route('site.admin.addProduct') }}" class="btn">
+                        <button type="submit">Add Product</button></a>
 
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach($products as $product)
+                            <tr>
+                                <td>{{ $product->id }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->productCategory->name }}</td>
+                                <td>{{ $product->description }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>{{ $product->status }}</td>
+                                <td>
+
+                                    <button class="btn btn-edit" onclick="editProduct({{ $product->id }})">Edit</button>
+                                    <form action="{{ route('site.admin.deleteProduct', $product->id) }}" method="post" style="display: inline-block;">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-delete" onclick="return confirm('Apakah Benar ingin menghapus?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </section>
-
         </section>
     </div>
+
+    <!-- Your existing script section remains the same -->
     <script>
-          function editUser(userId) {
-        // Redirect or perform any action for editing the user with the given userId
-        window.location.href = "{{ url('admin/edit') }}/" + userId;
-    }
-        // Menambahkan script untuk menangani klik pada menu-toggle
+        function editProduct(productId) {
+            window.location.href = "{{ url('admin/product/edit') }}/" + productId;
+        }
+
         document.querySelectorAll('.menu-toggle').forEach(item => {
             item.addEventListener('click', event => {
                 const submenu = item.nextElementSibling;

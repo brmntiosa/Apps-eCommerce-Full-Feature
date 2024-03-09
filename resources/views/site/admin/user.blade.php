@@ -322,8 +322,34 @@
 
             <section class="attendance">
                 <div class="attendance-list">
-                    <h1>Halaman Dasboars</h1>
-
+                    <h1>Registered Users</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($users as $user)
+                            <tr>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" onclick="editUser({{ $user->id }})">Edit</button>
+                                    <form action="{{ route('site.admin.deleteUser', $user->id) }}" method="post" style="display: inline-block;">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
