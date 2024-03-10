@@ -345,7 +345,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="logout">
+                    <a href="/admin/logout" class="logout">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="nav-item">Log out</span>
                     </a>

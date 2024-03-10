@@ -282,7 +282,7 @@
             <ul>
                 <li>
                     <a href="#" class="logo">
-                        <img src="./pic/logo.jpg" alt="Logo">
+                        <img src="{{asset('global/landingpage/images')}}/adminlogo.png" alt="Logo">
                         <span class="nav-item">Admin</span>
                     </a>
                 </li>

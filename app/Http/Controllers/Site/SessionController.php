@@ -49,5 +49,6 @@ class SessionController extends Controller
     {
         Auth::logout();
         return redirect('/login')->with('success', 'Berhasil logout. Harap Login kembali jika ingin mengakses detail Produk');
+
     }
 }
