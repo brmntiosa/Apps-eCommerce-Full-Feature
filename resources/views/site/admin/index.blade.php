@@ -280,7 +280,7 @@
             <ul>
                 <li>
                     <a href="#" class="logo">
-                        <img src="./pic/logo.jpg" alt="Logo">
+                        <img src="{{asset('global/landingpage/images')}}/adminlogo.png" alt="Logo">
                         <span class="nav-item">Admin</span>
                     </a>
                 </li>
@@ -322,7 +322,7 @@
 
             <section class="attendance">
                 <div class="attendance-list">
-                    <h1>Halaman Dasboars</h1>
+                    <h1>Selamat Datang di Halaman Dasboard Admin</h1>
 
                 </div>
             </section>

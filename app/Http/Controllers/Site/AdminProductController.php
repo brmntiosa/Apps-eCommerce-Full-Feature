@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
+use Illuminate\Support\Facades\Auth;
 
 class AdminProductController extends Controller
 {
@@ -124,5 +125,11 @@ class AdminProductController extends Controller
         }
     }
         return redirect()->route('site.admin.getIndex')->with('success', 'Product added successfully');
+    }
+
+    function logout(){
+        Auth::logout();
+        return redirect('/login')->with('success', 'Berhasil logout.');
+
     }
 }
