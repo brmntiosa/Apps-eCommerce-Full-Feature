@@ -2,35 +2,40 @@
 
 namespace App\Http\Controllers\site;
 
+use App\Models\Wishlist;
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
 
-    public function getIndex()
+    public function index()
     {
-        $user = Auth::user();
+        $wishlists = Wishlist::with('user', 'product')->get();
 
-        if ($user) {
-            $products = $user->wishlist;
-            return view('site.wishlist.index', ['products' => $products]);
-        }
-
-        return redirect('/login'); // atau sesuaikan dengan rute login Anda
+        return view('site.wishlist.index', compact('wishlists'));
     }
 
-    public function addToWishlist(Product $product)
+    public function addToWishlist(Request $request)
     {
-        $user = Auth::user();
+        // dd($request->all());
+        // Validasi request jika diperlukan
 
-        if ($user) {
-            $user->wishlist->attach($product->id);
-            return redirect()->route('wishlist.index');
-        }
+        $wishlists = Wishlist::create([
+            'user_id' => auth()->user()->id,
+            'product_id' => $request->input('product_id'),
 
-        return redirect('/login'); // atau sesuaikan dengan rute login Anda
+        ]);
+
+        return redirect()->route('site.wishlist.index')->with('success', 'Product added to wishlist successfully');
+    }
+
+    public function removeFromWishlist($id)
+    {
+        Wishlist::findOrFail($id)->delete();
+
+        return redirect()->route('site.wishlist.index')->with('success', 'Product removed from wishlist successfully');
     }
 }

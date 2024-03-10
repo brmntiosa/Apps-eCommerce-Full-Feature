@@ -41,9 +41,6 @@ Route::get('/verification/{id}', [UserController::class, 'verification']);
 Route::post('/verified', [UserController::class, 'verifiedOtp'])->name('verifiedOtp');
 
 Route::get('/resend-otp', [UserController::class, 'resendOtp'])->name('resendOtp');
-Route::get('/wishlist', [WishlistController::class, 'getIndex'])->name('site.wishlist.index');
-Route::post('/wishlist/add/{product}', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
-
 
 Route::get('/home', [HomeController::class, 'getIndex'])->name('site.home.getIndex');
 Route::group(['middleware' => 'custom.login'], function () {
@@ -68,6 +65,18 @@ Route::post('/admin/product/add', [AdminProductController::class, 'addProduct'])
 
 
 Route::get('/kategori/search', 'App\Http\Controllers\Site\KategoriController@getIndex')->name('site.kategori.searchByName');
+
+
+// Wishlist
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('site.wishlist.index');
+    Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('site.wishlist.addToWishlist');
+
+    Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'removeFromWishlist'])->name('site.wishlist.removeFromWishlist');
+
+    // Tambahkan rute untuk menghapus produk dari wishlist jika diperlukan
+});
 //////////////////////////////////////////////////
 
 // Route::get('/login', [AuthController::class, 'get_login'])->name('login');
