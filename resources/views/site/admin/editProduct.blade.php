@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Edit Product | Attendance Dashboard</title>
@@ -173,16 +174,17 @@
         button:hover {
             background-color: #34AF6D;
         }
-        .kembali{
-        width: 8vh;
-        position: absolute;
-        left: 10px;
-        bottom: 6vh;
 
-    }
+        .kembali {
+            width: 8vh;
+            position: absolute;
+            left: 10px;
+            bottom: 6vh;
 
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
 
@@ -196,7 +198,7 @@
                 <div class="attendance-list">
                     <a href='/admin'>
                         <img class="kembali" src="{{asset('global/landingpage/images/kembali.png')}}" alt="">
-                   </a>
+                    </a>
                     <form action="{{ route('site.admin.updateProduct', $product->id) }}" method="post">
                         @csrf
                         @method('put')
@@ -209,31 +211,31 @@
                             <select name="category" required>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}" {{ $product->product_category_id == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div> --}}
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <textarea name="description" required>{{ $product->description }}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Price:</label>
-                            <input type="text" name="price" value="{{ $product->price }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="status">Status:</label>
-                            <select name="status" required>
-                                <option value="active" {{ $product->status == 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="inactive" {{ $product->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                            </select>
-                        </div>
-                        <button type="submit">Update Product</button>
-                    </form>
+                        {{ $category->name }}
+                        </option>
+                        @endforeach
+                        </select>
+                </div> --}}
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea name="description" required>{{ $product->description }}</textarea>
                 </div>
-            </section>
-        </section>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="text" name="price" value="{{ $product->price }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select name="status" required>
+                        <option value="active" {{ $product->status == 'active' ? 'selected' : '' }}>Active</option>
+                        <option value="inactive" {{ $product->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                    </select>
+                </div>
+                <button type="submit">Update Product</button>
+                </form>
+    </div>
+    </section>
+    </section>
     </div>
 
     <script>
@@ -245,4 +247,5 @@
         });
     </script>
 </body>
+
 </html>

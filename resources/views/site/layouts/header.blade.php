@@ -1,7 +1,6 @@
 <header class="header trans_300">
 
     <!-- Top Navigation -->
-
     <div class="top_nav">
         <div class="container">
             <div class="row">
@@ -11,9 +10,6 @@
                 <div class="col-md-6 text-right">
                     <div class="top_nav_right">
                         <ul class="top_nav_menu">
-
-                            <!-- Currency / Language / My Account -->
-
                             <li class="account">
                                 <a href="#">
                                     My Account
@@ -32,7 +28,6 @@
     </div>
 
     <!-- Main Navigation -->
-
     <div class="main_nav_container">
         <div class="container">
             <div class="row">
@@ -46,7 +41,6 @@
                             <li><a href="{{route('site.kategori.getIndex')}}">Kategori</a></li>
                             <li><a href="{{route('site.wishlist.index')}}">Wishlist</a></li>
                         </ul>
-
                         <div class="hamburger_container">
                             <i class="fa fa-bars" aria-hidden="true"></i>
                         </div>

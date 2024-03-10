@@ -37,18 +37,10 @@
 <body>
 
     <div class="super_container">
-
-        <!-- Header -->
-
         <div class="fs_menu_overlay"></div>
-
-        <!-- Hamburger Menu -->
-
         <div class="container product_section_container">
             <div class="row">
                 <div class="col product_section clearfix">
-
-                    <!-- Breadcrumbs -->
                     <div class="breadcrumbs d-flex flex-row align-items-center">
                         <ul>
                             <li><a href="/home">Home</a></li>
@@ -58,7 +50,6 @@
                     </div>
 
                     <!-- Sidebar -->
-
                     <div class="sidebar">
                         <div class="sidebar_section">
                             <div class="sidebar_title">
@@ -69,10 +60,8 @@
                                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                                         </svg>
                                     </button>
-
                                 </form>
                             </div>
-
                             <!-- Price Range Filtering -->
                             <div class="sidebar_section" style="margin-top: 100px;">
                                 <div class="sidebar_title">
@@ -84,16 +73,12 @@
                                 <div id="slider-range"></div>
                                 <div class="filter_button"><span>filter</span></div>
                             </div>
-
                         </div>
                     </div>
 
                     <!-- Main Content -->
-
                     <div class="main_content">
-
                         <!-- Product Sorting -->
-
                         <div class="product_sorting_container product_sorting_container_top">
                             <!-- Sorting options... -->
                             <ul class="product_sorting">
@@ -141,17 +126,11 @@
                             <p>Tidak ada produk ditemukan untuk kata kunci pencarian tersebut.</p>
                             @endforelse
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
-    <!-- Benefit -->
-    <!-- Newsletter -->
-    <!-- Your other sections... -->
 
     </div>
 

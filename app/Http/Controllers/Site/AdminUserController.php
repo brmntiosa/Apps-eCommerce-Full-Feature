@@ -14,7 +14,6 @@ class AdminUserController extends Controller
 
         return view('site.admin.user', ['users' => $users]);
     }
-    // app/Http/Controllers/Site/AdminController.php
     public function editUser($id)
     {
         $user = User::find($id);
@@ -31,13 +30,13 @@ class AdminUserController extends Controller
     }
 
     public function updateUser(Request $request, $id)
-{
-    $user = User::find($id);
-    $user->update([
-        'name' => $request->input('name'),
-        'email' => $request->input('email'),
-    ]);
+    {
+        $user = User::find($id);
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ]);
 
-    return redirect()->route('site.admin.getIndex')->with('success', 'User updated successfully');
-}
+        return redirect()->route('site.admin.getIndex')->with('success', 'User updated successfully');
+    }
 }
