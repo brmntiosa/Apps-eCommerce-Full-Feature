@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Controller;
+use App\Models\EmailVerification;
 use App\Models\User;
 use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Models\EmailVerification;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-// use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use Mail;
 
 class UserController extends Controller
 {
-    //
     public function loadRegister()
     {
         return view('site.login.register');
@@ -26,13 +22,13 @@ class UserController extends Controller
         $request->validate([
             'name' => 'string|required|min:2',
             'email' => 'string|email|required|max:100|unique:users',
-            'role' => 'string|in:user,admin', // Validasi role agar hanya user atau admin
+            'role' => 'string|in:user,admin',
         ]);
 
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->role = $request->role; // Tambahkan baris ini untuk menyimpan role
+        $user->role = $request->role;
         $user->save();
 
         return redirect("/verification/" . $user->id);
@@ -83,21 +79,17 @@ class UserController extends Controller
             return redirect("/verification/" . $userData->id);
         }
 
-        // Pastikan user yang diberikan ke Auth::login adalah instance Authenticatable
         if ($userData instanceof \Illuminate\Contracts\Auth\Authenticatable) {
-            // Set custom data to the session
             $request->session()->put('custom_login', true);
             Auth::login($userData);
 
-            // Cek peran pengguna setelah login
             if ($userData->role == 'user') {
                 return redirect('/home');
             } elseif ($userData->role == 'admin') {
                 return redirect('/admin');
             }
         }
-
-        return redirect('/home'); // Redirect default jika peran tidak dikenali
+        return redirect('/home');
     }
 
     public function loadDashboard()
@@ -117,7 +109,7 @@ class UserController extends Controller
         }
         $email = $user->email;
 
-        $this->sendOtp($user); //OTP SEND
+        $this->sendOtp($user);
 
         return view('verification', compact('email'));
     }
@@ -152,11 +144,11 @@ class UserController extends Controller
         $currentTime = time();
         $time = $otpData->created_at;
 
-        if ($currentTime >= $time && $time >= $currentTime - (90 + 5)) { //90 seconds
+        if ($currentTime >= $time && $time >= $currentTime - (90 + 5)) {
             return response()->json(['success' => false, 'msg' => 'Please try after some time']);
         } else {
 
-            $this->sendOtp($user); //OTP SEND
+            $this->sendOtp($user);
             return response()->json(['success' => true, 'msg' => 'OTP has been sent']);
         }
     }

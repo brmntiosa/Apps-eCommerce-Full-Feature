@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <title>Attendance Dashboard | By Code Info</title>
@@ -7,7 +8,7 @@
     <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-GLhlTQ8i1I6TurfA6GvaqEF+TcRb7M/dfQFc8e9xHb6ZLl/3gy2IepER95F5jqFw" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <style>
         /* import google fonts */
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
@@ -274,6 +275,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <nav>
@@ -302,8 +304,6 @@
                         <span class="nav-item">Products</span>
                     </a>
                 </li>
-
-
                 <li>
                     <a href="#" class="logout">
                         <i class="fas fa-sign-out-alt"></i>
@@ -312,14 +312,11 @@
                 </li>
             </ul>
         </nav>
-
         <section class="main">
             <div class="main-top">
                 <h1>Users</h1>
                 <i class="fas fa-user-cog"></i>
             </div>
-
-
             <section class="attendance">
                 <div class="attendance-list">
                     <h1>Registered Users</h1>
@@ -352,15 +349,12 @@
                     </table>
                 </div>
             </section>
-
         </section>
     </div>
     <script>
-          function editUser(userId) {
-        // Redirect or perform any action for editing the user with the given userId
-        window.location.href = "{{ url('admin/edit') }}/" + userId;
-    }
-        // Menambahkan script untuk menangani klik pada menu-toggle
+        function editUser(userId) {
+            window.location.href = "{{ url('admin/edit') }}/" + userId;
+        }
         document.querySelectorAll('.menu-toggle').forEach(item => {
             item.addEventListener('click', event => {
                 const submenu = item.nextElementSibling;
@@ -369,4 +363,5 @@
         });
     </script>
 </body>
+
 </html>

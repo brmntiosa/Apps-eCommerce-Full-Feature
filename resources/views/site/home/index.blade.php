@@ -74,15 +74,12 @@
                 <span onclick="closeNotification()" style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 60px;">&times;</span>
                 <h2 style="font-family: 'Arial', sans-serif; margin: 0;">Selamat Datang, {{ Auth::user()->name }}!</h2>
                 <p style="font-size: 16px; margin-top: 10px;">Catatan: Semua fitur Sorting di sini telah diaktifkan, mulai dari penyesuaian berdasarkan kategori, harga, hingga pengurutan berdasarkan abjad.</p>
-                <!-- Tambahkan elemen desain lainnya sesuai keinginan -->
             </div>
 
             <script>
-                // Fungsi untuk menutup pemberitahuan
                 function closeNotification() {
                     document.getElementById('notification').style.display = 'none';
                 }
-                // Tampilkan pemberitahuan setelah halaman dimuat
                 document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('notification').style.display = 'block';
                 });
@@ -122,10 +119,6 @@
             </div>
         </div>
 
-
-
-
-
         <div class="row">
             <div class="col">
                 <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
@@ -149,7 +142,6 @@
                                         </i>
                                     </button>
                                 </form>
-
                                 <h6 class="product_name"><a href="{{ route('site.produk.getIndex', $product->id) }}">{{ $product->name }}</a></h6>
                                 <div class="product_price" style="margin-top: -25px;">${{ $product->price }}</div>
                                 <div class="wishlist_icon">

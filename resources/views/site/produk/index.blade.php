@@ -72,9 +72,6 @@
 <div class="container single_product_container">
     <div class="row">
         <div class="col">
-
-            <!-- Breadcrumbs -->
-
             <div class="breadcrumbs d-flex flex-row align-items-center">
                 <ul>
                     <li><a href="/home">Home</a></li>
@@ -82,7 +79,6 @@
                     <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a></li>
                 </ul>
             </div>
-
         </div>
     </div>
     <div class="row">
@@ -93,9 +89,9 @@
                         <div class="single_product_thumbnails">
                             <ul>
                                 @foreach ($products->productImage as $index => $productImage)
-                                    <li class="{{ $index === 0 ? 'active' : '' }}">
-                                        <img src="{{ asset($productImage->url) }}" alt="{{ $products->name }}" data-image="{{ asset($productImage->url) }}" onclick="changeBackgroundImage(this, '{{ $productImage->url }}')">
-                                    </li>
+                                <li class="{{ $index === 0 ? 'active' : '' }}">
+                                    <img src="{{ asset($productImage->url) }}" alt="{{ $products->name }}" data-image="{{ asset($productImage->url) }}" onclick="changeBackgroundImage(this, '{{ $productImage->url }}')">
+                                </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -107,8 +103,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
         {{-- {{dd($products)}} --}}
@@ -117,10 +111,9 @@
                 if ($(".single_product_thumbnails ul li").length) {
                     var thumbs = $(".single_product_thumbnails ul li");
                     var singleImage = $("#selected_image");
-
-                    thumbs.each(function () {
+                    thumbs.each(function() {
                         var item = $(this);
-                        item.on("click", function () {
+                        item.on("click", function() {
                             thumbs.removeClass("active");
                             item.addClass("active");
                             var img = item.find("img").data("image");
@@ -130,13 +123,10 @@
                 }
             }
 
-            // Fungsi ini akan dipanggil ketika thumbnail di klik
             function changeBackgroundImage(element, imgUrl) {
                 console.log("Image clicked. URL: ", imgUrl);
                 $("#selected_image").css("background-image", "url(" + imgUrl + ")");
             }
-
-            // Panggil fungsi inisialisasi
             initThumbnail();
         </script>
 
@@ -172,16 +162,10 @@
             </div>
         </div>
     </div>
-
-
-
-
 </div>
 
 <!-- Tabs -->
-
 <div class="tabs_section_container">
-
     <div class="container">
         <div class="row">
             <div class="col">
@@ -230,7 +214,6 @@
                     </div>
                 </div>
                 <!-- Tab Additional Info -->
-
                 <div id="tab_2" class="tab_container">
                     <div class="row">
                         <div class="col additional_info_col">
@@ -244,19 +227,12 @@
                 </div>
 
                 <!-- Tab Reviews -->
-
                 <div id="tab_3" class="tab_container">
                     <div class="row">
-
-                        <!-- User Reviews -->
-
                         <div class="col-lg-6 reviews_col">
                             <div class="tab_title reviews_title">
                                 <h4>Reviews (2)</h4>
                             </div>
-
-                            <!-- User Review -->
-
                             <div class="user_review_container d-flex flex-column flex-sm-row">
                                 <div class="user">
                                     <div class="user_pic"></div>
@@ -276,9 +252,7 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                 </div>
                             </div>
-
                             <!-- User Review -->
-
                             <div class="user_review_container d-flex flex-column flex-sm-row">
                                 <div class="user">
                                     <div class="user_pic"></div>
@@ -299,40 +273,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Add Review -->
-
-                        <div class="col-lg-6 add_review_col">
-
-                            <div class="add_review">
-                                <form id="review_form" action="post">
-                                    <div>
-                                        <h1>Add Review</h1>
-                                        <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-                                        <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
-                                    </div>
-                                    <div>
-                                        <h1>Your Rating:</h1>
-                                        <ul class="user_star_rating">
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                        </ul>
-                                        <textarea id="review_message" class="input_review" name="message" placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
-                                    </div>
-                                    <div class="text-left text-sm-right">
-                                        <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -340,7 +282,6 @@
 </div>
 
 <!-- Benefit -->
-
 <div class="benefit">
     <div class="container">
         <div class="row benefit_row">
@@ -397,4 +338,3 @@
 @section('extra-script')
 <!-- start here -->
 @endsection
-

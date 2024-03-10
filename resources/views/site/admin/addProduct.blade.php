@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Edit Product | Attendance Dashboard</title>
@@ -173,16 +174,17 @@
         button:hover {
             background-color: #34AF6D;
         }
-        .kembali{
-        width: 8vh;
-        position: absolute;
-        left: 10px;
-        bottom: 6vh;
 
-    }
+        .kembali {
+            width: 8vh;
+            position: absolute;
+            left: 10px;
+            bottom: 6vh;
 
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <section class="main">
@@ -243,7 +245,6 @@
 
     <script>
         function addProduct() {
-            // Ambil nilai dari input form
             var productName = $('#productName').val();
             var description = $('#description').val();
             var price = $('#price').val();
@@ -262,24 +263,20 @@
                     'stock': stock,
                     'status': status
                 },
-                success: function (data) {
-                    // Tampilkan pesan sukses atau lakukan redirect sesuai kebutuhan
+                success: function(data) {
                     alert('Product added successfully!');
-                    location.reload(); // Contoh: Reload halaman setelah menambahkan produk
+                    location.reload();
                 },
-                error: function (error) {
-                    // Tampilkan pesan error atau lakukan penanganan error sesuai kebutuhan
+                error: function(error) {
                     alert('Failed to add product. Please try again.');
                 }
             });
         }
 
         function cancelAddProduct() {
-            // Sembunyikan form tambah produk
             $('#addProductForm').hide();
         }
 
-        // Fungsi untuk menampilkan form tambah produk
         function showAddProductForm() {
             $('#addProductForm').show();
         }
@@ -297,4 +294,5 @@
         });
     </script>
 </body>
+
 </html>
