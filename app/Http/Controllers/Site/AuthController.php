@@ -27,17 +27,11 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-
         ]);
 
-
-
         $user = User::create($request->except(['_token']));
-
         event(new Registered($user));
-
         auth()->login($user);
-
         return redirect()->route('verification.notice')->with('success', 'Registration success. Please check your email for verification.');
     }
 }

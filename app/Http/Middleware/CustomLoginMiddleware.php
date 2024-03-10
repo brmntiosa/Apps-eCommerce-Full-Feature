@@ -11,7 +11,6 @@ class CustomLoginMiddleware
 {
     public function handle($request, Closure $next)
     {
-        // Periksa apakah pengguna telah melewati verifikasi
         if (!$request->session()->has('custom_login') || !$request->user()->is_verified) {
             return redirect('/');
         }

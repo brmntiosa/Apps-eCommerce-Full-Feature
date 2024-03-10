@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -12,12 +13,14 @@ use Illuminate\Support\Facades\Hash;
 
 class SessionController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         return view('site.login.index');
     }
 
-    function login(Request $request){
+    function login(Request $request)
+    {
         Session::flash('email', $request->email);
 
         $request->validate([
@@ -42,13 +45,9 @@ class SessionController extends Controller
         }
     }
 
-    function logout(){
+    function logout()
+    {
         Auth::logout();
         return redirect('/login')->with('success', 'Berhasil logout. Harap Login kembali jika ingin mengakses detail Produk');
-
-
-
-
-
     }
 }

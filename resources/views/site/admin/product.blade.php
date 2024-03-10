@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-GLhlTQ8i1I6TurfA6GvaqEF+TcRb7M/dfQFc8e9xHb6ZLl/3gy2IepER95F5jqFw" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
     <style>
-        /* import google fonts */
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
         * {
@@ -269,6 +269,7 @@
         .submenu a:hover {
             background: #eee;
         }
+
         .alert {
             position: relative;
             padding: 15px;
@@ -296,28 +297,28 @@
         .alert button.close:hover {
             color: #155724;
         }
-        .btnn {
-        display: inline-block;
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 16px;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
 
-    .btnn:hover {
-        background-color: #45a049;
-    }
+        .btnn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btnn:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <nav>
-
-
             <ul>
                 <li>
                     <a href="#" class="logo">
@@ -343,8 +344,6 @@
                         <span class="nav-item">Products</span>
                     </a>
                 </li>
-
-
                 <li>
                     <a href="#" class="logout">
                         <i class="fas fa-sign-out-alt"></i>
@@ -353,24 +352,20 @@
                 </li>
             </ul>
         </nav>
-
         <section class="main">
             <div class="main-top">
                 <h1>Products</h1>
-
                 <i class="fas fa-shopping-bag"></i>
-
             </div>
             @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
                 <button class="close" onclick="this.parentElement.style.display='none'">&times;</button>
             </div>
-        @endif
+            @endif
             <section class="attendance">
                 <div class="attendance-list">
                     <h1>Product List</h1>
-
                     <a href="{{ route('site.admin.addProduct') }}" class="btnn">Add Product</a>
                     <table class="table">
                         <thead>
@@ -385,7 +380,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach($products as $product)
                             <tr>
                                 <td>{{ $product->id }}</td>
@@ -395,7 +389,6 @@
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->status }}</td>
                                 <td>
-
                                     <button class="btn btn-edit" onclick="editProduct({{ $product->id }})">Edit</button>
                                     <form action="{{ route('site.admin.deleteProduct', $product->id) }}" method="post" style="display: inline-block;">
                                         @csrf
@@ -412,12 +405,10 @@
         </section>
     </div>
 
-    <!-- Your existing script section remains the same -->
     <script>
         function editProduct(productId) {
             window.location.href = "{{ url('admin/product/edit') }}/" + productId;
         }
-
         document.querySelectorAll('.menu-toggle').forEach(item => {
             item.addEventListener('click', event => {
                 const submenu = item.nextElementSibling;
@@ -426,4 +417,5 @@
         });
     </script>
 </body>
+
 </html>
