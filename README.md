@@ -38,7 +38,7 @@ Aplikasi website ini adalah platform e-commerce yang dirancang khusus untuk penj
 
 1. **Clone Repository:**
    ```bash
-   git clone https://github.com/username/nama-repository.git
+   https://github.com/BramantioSYahrulAlam/NewModifyShop.git
    ```
 
 2. **Masuk ke Direktori:**
