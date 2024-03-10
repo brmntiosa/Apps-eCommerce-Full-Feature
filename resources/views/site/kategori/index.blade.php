@@ -131,13 +131,11 @@
                                         <img src="{{ asset($product->productImage->first()['url']) }}" alt="{{ $product->name }}">
                                         @endif
                                     </div>
-                                    <div class="favorite"></div>
                                     <div class="product_info">
                                         <h6 class="product_name"><a href="{{ route('site.produk.getIndex', $product->id) }}">{{ $product->name }}</a></h6>
                                         <div class="product_price">${{ $product->price }}</div>
                                     </div>
                                 </div>
-                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
                             </div>
                             @empty
                             <p>Tidak ada produk ditemukan untuk kata kunci pencarian tersebut.</p>
