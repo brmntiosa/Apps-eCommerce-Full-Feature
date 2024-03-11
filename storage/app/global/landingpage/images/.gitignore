@@ -1,0 +1,17 @@
+# Ignore seluruh folder public/storage
+/public/storage/*
+
+# Kecuali file .gitignore di dalam folder public/storage
+!/public/storage/.gitignore
+
+# Ignore seluruh isi folder public/images
+/public/images/*
+
+# Kecuali file .gitignore di dalam folder public/images
+!/public/images/.gitignore
+
+# Ignore seluruh isi folder storage/app/public/images
+/storage/app/public/images/*
+
+# Kecuali file .gitignore di dalam folder storage/app/public/images
+!/storage/app/public/images/.gitignore
