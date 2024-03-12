@@ -56,7 +56,7 @@ Aplikasi website ini adalah platform e-commerce yang dirancang khusus untuk penj
     ```bash
     cp .env.example .env
     ```
- 
+     menyesuaikan nama Database 
 
 5. **Menjalankan Migrations:**
    - Jalankan perintah migrate untuk mengatur skema database:
@@ -68,6 +68,12 @@ Aplikasi website ini adalah platform e-commerce yang dirancang khusus untuk penj
    - Jalankan perintah seeder untuk mengisi database dengan data awal:
     ```bash
     php artisan db:seed
+    ```
+
+7. **Menjalankan Storage link**
+    - Jalankan perintah storage untuk menghubungkan relasi dantar gambar
+    ```bash
+    php artisan storage:link
     ```
 
 7. **Generate Kunci Aplikasi:**
