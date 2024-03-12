@@ -28,6 +28,15 @@
         </div>
     </div>
     @endif
+    @if(session('error'))
+    <div class="row">
+        <div class="col text-center">
+            <div class="alert alert-danger" id="welcomeMessage">
+                {{ session('error') }}
+            </div>
+        </div>
+    </div>
+    @endif
 
 </div>
 
@@ -61,8 +70,6 @@
                         <img src="{{ asset($wishlist->product->productImage->first()['url']) }}" alt="{{ $wishlist->product->name }}">
                     </div>
                     <div class="product_info">
-
-
                         <div class="product_info">
                             <h6>{{ $wishlist->product->name }}</h6>
                             <div class="product_price">${{ $wishlist->product->price }}</div>
