@@ -24,6 +24,7 @@ class AdminUserController extends Controller
     public function deleteUser($id)
     {
         $user = User::find($id);
+        $user->wishlist()->detach();
         $user->delete();
 
         return redirect()->route('site.admin.getIndex')->with('success', 'User deleted successfully');
