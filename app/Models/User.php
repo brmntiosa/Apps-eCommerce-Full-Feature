@@ -55,6 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function wishlist(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'wishlists', 'user_id', 'product_id')->withTimestamps();
+        return $this->belongsToMany(Product::class, 'wishlists', 'user_id', 'product_id')
+            ->withTimestamps();
     }
 }
