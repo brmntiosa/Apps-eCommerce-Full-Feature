@@ -24,10 +24,10 @@ use App\Models\Wishlist;
 */
 
 
-//Login, Logout dan register 
+//Login, Logout dan register
 Route::get('/sesi/logout', [SessionController::class, 'logout'])->name('logout')->middleware('auth');
 Route::get('/register', [UserController::class, 'loadRegister']);
-Route::post('/register', [UserController::class, 'studentRegister'])->name('studentRegister');
+Route::post('/register', [UserController::class, 'userRegister'])->name('userRegister');
 Route::get('/login', function () {
     return redirect('/');
 });

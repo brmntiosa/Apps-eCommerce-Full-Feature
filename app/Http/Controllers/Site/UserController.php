@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\EmailVerification;
+use App\Models\OneTimePassword;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class UserController extends Controller
         return view('site.login.register');
     }
 
-    public function studentRegister(Request $request)
+    public function userRegister(Request $request)
     {
         $request->validate([
             'name' => 'string|required|min:2',
@@ -31,6 +32,9 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->save();
 
+        // Create OneTimePassword record
+        $this->createOneTimePassword($user);
+
         return redirect("/verification/" . $user->id);
     }
 
@@ -42,30 +46,30 @@ class UserController extends Controller
         return view('site.login.index');
     }
 
-    public function sendOtp($user)
+    private function sendOtp($user)
     {
         $otp = rand(100000, 999999);
         $time = time();
 
-        EmailVerification::updateOrCreate(
-            ['email' => $user->email],
+        OneTimePassword::updateOrCreate(
+            ['user_id' => $user->id],
             [
-                'email' => $user->email,
-                'otp' => $otp,
-                'created_at' => $time
+                'user_id' => $user->id,
+                'otp_code' => $otp,
+                'is_used' => false,
+                'valid_until' => now()->addMinutes(5), // You can adjust the validity period
             ]
         );
 
+        // Send OTP via email (you can modify this part based on your email sending logic)
         $data['email'] = $user->email;
         $data['title'] = 'Mail Verification';
-
-        $data['body'] = 'Your OTP is:- ' . $otp;
+        $data['body'] = 'Your OTP is: ' . $otp;
 
         Mail::send('mailVerification', ['data' => $data], function ($message) use ($data) {
             $message->to($data['email'])->subject($data['title']);
         });
     }
-
     public function userLogin(Request $request)
     {
         $request->validate([
@@ -115,41 +119,71 @@ class UserController extends Controller
     }
 
     public function verifiedOtp(Request $request)
-    {
-        $user = User::where('email', $request->email)->first();
-        $otpData = EmailVerification::where('otp', $request->otp)->first();
-        if (!$otpData) {
-            return response()->json(['success' => false, 'msg' => 'You entered wrong OTP']);
-        } else {
+{
+    $user = User::where('email', $request->email)->first();
+    $otpData = OneTimePassword::where('user_id', $user->id)
+        ->where('otp_code', $request->otp)
+        ->where('is_used', false)
+        ->where('valid_until', '>=', now())
+        ->first();
 
-            $currentTime = time();
-            $time = $otpData->created_at;
+    if (!$otpData) {
+        return response()->json(['success' => false, 'msg' => 'You entered wrong OTP or the OTP has expired']);
+    } else {
+        // Mark the OTP as used
+        $otpData->update(['is_used' => true]);
 
-            if ($currentTime >= $time && $time >= $currentTime - (90 + 5)) { //90 seconds
-                User::where('id', $user->id)->update([
-                    'is_verified' => 1
-                ]);
-                return response()->json(['success' => true, 'msg' => 'Mail has been verified']);
-            } else {
-                return response()->json(['success' => false, 'msg' => 'Your OTP has been Expired']);
-            }
-        }
+        // Mark the user as verified
+        User::where('id', $user->id)->update(['is_verified' => 1]);
+
+        return response()->json(['success' => true, 'msg' => 'Mail has been verified']);
     }
+}
 
     public function resendOtp(Request $request)
     {
         $user = User::where('email', $request->email)->first();
-        $otpData = EmailVerification::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json(['success' => false, 'msg' => 'Email not found']);
+        }
+
+        $otpData = OneTimePassword::where('user_id', $user->id)->first();
+
+        if (!$otpData) {
+            return response()->json(['success' => false, 'msg' => 'No OTP data found']);
+        }
 
         $currentTime = time();
-        $time = $otpData->created_at;
+        $time = strtotime($otpData->valid_until);
 
         if ($currentTime >= $time && $time >= $currentTime - (90 + 5)) {
             return response()->json(['success' => false, 'msg' => 'Please try after some time']);
         } else {
-
             $this->sendOtp($user);
             return response()->json(['success' => true, 'msg' => 'OTP has been sent']);
         }
+    }
+
+    private function createOneTimePassword($user)
+    {
+        $otp = rand(100000, 999999);
+        $time = time();
+
+        OneTimePassword::create([
+            'user_id' => $user->id,
+            'otp_code' => $otp,
+            'is_used' => false,
+            'valid_until' => now()->addMinutes(5), // You can adjust the validity period
+        ]);
+
+        // Send OTP via email (you can modify this part based on your email sending logic)
+        $data['email'] = $user->email;
+        $data['title'] = 'Mail Verification';
+        $data['body'] = 'Your OTP is: ' . $otp;
+
+        Mail::send('mailVerification', ['data' => $data], function ($message) use ($data) {
+            $message->to($data['email'])->subject($data['title']);
+        });
     }
 }
