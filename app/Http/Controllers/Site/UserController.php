@@ -7,6 +7,7 @@ use App\Models\EmailVerification;
 use App\Models\OneTimePassword;
 use App\Models\User;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Mail;
@@ -22,22 +23,37 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'string|required|min:2',
-            'email' => 'string|email|required|max:100|unique:users',
+            'email' => 'string|email|required|max:100',
             'role' => 'string|in:user,admin',
         ]);
 
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->role = $request->role;
-        $user->save();
+        $user = User::where('email', $request->email)->first();
 
-        // Create OneTimePassword record
-        $this->createOneTimePassword($user);
+        if (!$user) {
+            // Jika pengguna belum terdaftar, buat pengguna baru
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->role = $request->role;
+            $user->save();
 
-        return redirect("/verification/" . $user->id);
+            // Create OneTimePassword record
+            $this->createOneTimePassword($user);
+
+            // Redirect ke halaman verifikasi
+            return redirect("/verification/" . $user->id);
+        } else {
+            // Jika pengguna sudah terdaftar
+            if ($user->is_verified == 0) {
+                // Jika belum diverifikasi, kirim OTP dan arahkan ke halaman verifikasi
+                $this->sendOtp($user);
+                return redirect("/verification/" . $user->id);
+            } else {
+                // Jika sudah diverifikasi, berikan tanggapan atau arahkan ke halaman selanjutnya
+                return redirect("/next-page")->with('status', 'User already registered and verified.');
+            }
+        }
     }
-
     public function loadLogin()
     {
         if (Auth::user()) {
