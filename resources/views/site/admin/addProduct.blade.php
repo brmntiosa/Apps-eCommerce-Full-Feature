@@ -233,6 +233,7 @@
                         <div class="form-group">
                             <label for="images">Product Images:</label>
                             <input type="file" name="images[]" id="images" class="form-control" multiple accept="image/*" required>
+                            <p>Maximal 4 Foto</p>
                         </div>
                         <button type="submit" class="btn btn-primary">Save Product</button>
                         <button type="button" onclick="cancelAddProduct()" class="btn btn-secondary">Cancel</button>
