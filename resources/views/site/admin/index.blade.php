@@ -304,6 +304,14 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="/admin/product">
+                        <i class="fas fa-bars"></i>
+                        <span class="nav-item">categories</span>
+                    </a>
+                </li>
+
+
 
                 <li>
                     <a href="#" class="logout">
