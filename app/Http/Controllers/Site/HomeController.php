@@ -13,7 +13,10 @@ class HomeController extends Controller
     public function getIndex()
     {
 
-        $products = Product::with(['productImage', 'productCategory'])->get();
+        $products = Product::with(['productImage', 'productCategory'])
+            ->where('status', 'active') // Menambahkan kondisi untuk status active
+            ->get();
+
         $categories = ProductCategory::distinct()->get(['name']);
 
         return view('site.home.index', ['products' => $products, 'categories' => $categories]);

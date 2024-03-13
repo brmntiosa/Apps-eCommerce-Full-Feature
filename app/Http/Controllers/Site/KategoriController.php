@@ -16,9 +16,11 @@ class KategoriController extends Controller
 
         // Periksa apakah ada pencarian atau tidak
         if ($searchTerm) {
-            $products = Product::where('name', 'like', '%' . $searchTerm . '%')->get();
+            $products = Product::where('name', 'like', '%' . $searchTerm . '%')
+                ->where('status', 'active') // Tambahkan kondisi status 'active'
+                ->get();
         } else {
-            $products = Product::all();
+            $products = Product::where('status', 'active')->get(); // Tambahkan kondisi status 'active'
         }
 
         return view('site.kategori.index', ['categories' => $categories, 'products' => $products]);

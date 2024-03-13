@@ -228,7 +228,7 @@
                     <label for="status">Status:</label>
                     <select name="status" required>
                         <option value="active" {{ $product->status == 'active' ? 'selected' : '' }}>Active</option>
-                        <option value="inactive" {{ $product->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                        <option value="non-active" {{ $product->status == 'non-active' ? 'selected' : '' }}>Non-active</option>
                     </select>
                 </div>
                 <button type="submit">Update Product</button>
