@@ -71,20 +71,7 @@
                              <i class="fa fa-envelope" aria-hidden="true"></i>
                          </span>
                      </div>
-                     <div class="wrap-input100 validate-input" data-validate="Role is required">
-                         {{-- role --}}
-                         <label for="role"></label>
-                         <select id="role" class="input100" name="role" required>
-                             <option value="user">User</option>
-                             <option value="admin">Admin</option>
-                             <!-- Tambahkan opsi peran lainnya jika diperlukan -->
-                         </select>
-                         <span class="focus-input100"></span>
-                         <span class="symbol-input100">
-                             <i class="fa fa-user" aria-hidden="true"></i>
-                         </span>
-                         <p style="font-size: 14px; margin-top: 10px; color: #777;">Pilih peran pengguna</p>
-                     </div>
+
                      <div class="container-login100-form-btn">
                          <button class="login100-form-btn" type="submit" name="submit">
                              Register

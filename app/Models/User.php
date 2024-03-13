@@ -58,4 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Product::class, 'wishlists', 'user_id', 'product_id')
             ->withTimestamps();
     }
+
+    public function oneTimePasswords()
+    {
+        return $this->hasMany(OneTimePassword::class);
+    }
 }

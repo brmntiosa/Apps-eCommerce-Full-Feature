@@ -49,6 +49,7 @@ Route::get('/admin/user', [AdminUserController::class, 'index'])->name('site.adm
 Route::delete('/admin/delete/{id}', [AdminUserController::class, 'deleteUser'])->name('site.admin.deleteUser');
 Route::get('/admin/edit/{id}', [AdminUserController::class, 'editUser'])->name('site.admin.editUser');
 Route::put('/admin/update/{id}', [AdminUserController::class, 'updateUser'])->name('site.admin.updateUser');
+Route::post('/admin/addUser', [AdminUserController::class, 'addUser'])->name('site.admin.addUser');
 Route::delete('/admin/product/delete/{id}', [AdminProductController::class, 'deleteProduct'])->name('site.admin.deleteProduct');
 Route::get('/admin/product', [AdminProductController::class, 'index'])->name('site.admin.getIndex');
 Route::get('/admin/categories', [AdminCategoriController::class, 'index'])->name('site.admin.category.index');
