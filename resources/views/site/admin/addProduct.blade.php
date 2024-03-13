@@ -227,7 +227,7 @@
                             <label for="status">Status:</label>
                             <select name="status" class="form-control" required>
                                 <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="non-active">Non-Active</option>
                             </select>
                         </div>
                         <div class="form-group">

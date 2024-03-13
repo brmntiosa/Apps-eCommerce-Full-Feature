@@ -26,8 +26,6 @@ class AdminProductController extends Controller
     }
 
 
-
-
     public function deleteProduct($id)
     {
         $product = Product::find($id);
@@ -49,11 +47,21 @@ class AdminProductController extends Controller
     public function updateProduct(Request $request, $id)
     {
         $product = Product::find($id);
+
+        // Pastikan nilai 'status' yang diterima adalah salah satu dari nilai yang diizinkan
+        $allowedStatus = ['active', 'non-active'];
+        $status = $request->input('status');
+
+        if (!in_array($status, $allowedStatus)) {
+            // Handle kesalahan jika nilai 'status' tidak valid
+            return redirect()->route('site.admin.getIndex')->with('error', 'Invalid status value');
+        }
+
         $product->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
-            'status' => $request->input('status'),
+            'status' => $status,
         ]);
 
         return redirect()->route('site.admin.getIndex')->with('success', 'Product updated successfully');
