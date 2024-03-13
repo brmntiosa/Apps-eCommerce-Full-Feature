@@ -113,9 +113,9 @@ class AdminProductController extends Controller
         return redirect()->route('site.admin.getIndex')->with('success', 'Product added successfully');
     }
 
-    function logout(){
+    function logout()
+    {
         Auth::logout();
         return redirect('/login')->with('success', 'Berhasil logout.');
-
     }
 }

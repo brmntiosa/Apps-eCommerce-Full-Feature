@@ -305,6 +305,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/admin/categories">
+                        <i class="fas fa-bars"></i>
+                        <span class="nav-item">categories</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="/admin/logout" class="logout">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="nav-item">Log out</span>

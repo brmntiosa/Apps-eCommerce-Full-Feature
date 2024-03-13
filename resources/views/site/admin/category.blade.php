@@ -2,12 +2,88 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
+    <title>Attendance Dashboard | By Code Info</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Font Awesome Cdn Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-GLhlTQ8i1I6TurfA6GvaqEF+TcRb7M/dfQFc8e9xHb6ZLl/3gy2IepER95F5jqFw" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+        .edit-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .edit-button:hover {
+            background-color: #2980b9;
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        .styled-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 6px 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .styled-button:hover {
+            background-color: #2980b9;
+        }
+
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .styled-table th {
+            background-color: #34AF6D;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .even-row {
+            background-color: #f9f9f9;
+        }
+
+        .odd-row {
+            background-color: #ffffff;
+        }
+
 
 
         * {
@@ -103,7 +179,6 @@
             display: flex;
         }
 
-        /* Main Section */
         .main {
             position: relative;
             padding: 20px;
@@ -185,7 +260,6 @@
             transition: 0.5s;
         }
 
-        /* Attendance List section */
         .attendance {
             margin-top: 20px;
             text-transform: capitalize;
@@ -270,50 +344,6 @@
         .submenu a:hover {
             background: #eee;
         }
-
-        .alert {
-            position: relative;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 5px;
-        }
-
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-        }
-
-        .alert button.close {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .alert button.close:hover {
-            color: #155724;
-        }
-
-        .btnn {
-            display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btnn:hover {
-            background-color: #45a049;
-        }
     </style>
 </head>
 
@@ -345,76 +375,68 @@
                         <span class="nav-item">Products</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="/admin/categories">
                         <i class="fas fa-bars"></i>
                         <span class="nav-item">categories</span>
                     </a>
                 </li>
+
+
+
                 <li>
-                    <a href="/admin/logout" class="logout">
+                    <a href="#" class="logout">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="nav-item">Log out</span>
                     </a>
                 </li>
             </ul>
         </nav>
+
         <section class="main">
-            <div class="main-top">
-                <h1>Products</h1>
-                <i class="fas fa-shopping-bag"></i>
-            </div>
-            @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-                <button class="close" onclick="this.parentElement.style.display='none'">&times;</button>
-            </div>
-            @endif
+
             <section class="attendance">
-                <div class="attendance-list">
-                    <h1>Product List</h1>
-                    <a href="{{ route('site.admin.addProduct') }}" class="btnn">Add Product</a>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($products as $product)
-                            <tr>
-                                <td>{{ $product->id }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->productCategory->name }}</td>
-                                <td>{{ $product->description }}</td>
-                                <td>{{ $product->price }}</td>
-                                <td>{{ $product->status }}</td>
-                                <td>
-                                    <button class="btn btn-edit" onclick="editProduct({{ $product->id }})">Edit</button>
-                                    <form action="{{ route('site.admin.deleteProduct', $product->id) }}" method="post" style="display: inline-block;">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-delete" onclick="return confirm('Apakah Benar ingin menghapus?')">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                <h2>categories</h2>
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Nama Kategori</th>
+                            <th>Jumlah Produk</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($categories as $index => $category)
+                        <tr class="{{ $index % 2 == 0 ? 'even-row' : 'odd-row' }}">
+                            <td>{{ $category->name }}</td>
+                            <td>{{ $categoryProductsCount[$category->id] ?? 0 }}</td>
+                            <td>
+                                <form action="{{ route('site.admin.category.delete', $category->id) }}" method="post" style="display: inline-block;">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="delete-button" onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+                <form action="{{ route('site.admin.addCategory') }}" method="post">
+                    @csrf
+                    <label for="category_name">Nama Kategori:</label>
+                    <input type="text" name="category_name" required>
+                    <button type="submit" class="styled-button">Tambah Kategori</button>
+                </form>
             </section>
+
         </section>
     </div>
-
     <script>
-        function editProduct(productId) {
-            window.location.href = "{{ url('admin/product/edit') }}/" + productId;
+        function editUser(userId) {
+            window.location.href = "{{ url('admin/edit') }}/" + userId;
         }
         document.querySelectorAll('.menu-toggle').forEach(item => {
             item.addEventListener('click', event => {
