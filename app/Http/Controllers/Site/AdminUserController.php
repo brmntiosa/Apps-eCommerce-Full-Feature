@@ -21,13 +21,39 @@ class AdminUserController extends Controller
         return view('site.admin.edit', ['user' => $user]);
     }
 
+    public function addUser(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'role' => 'required',
+
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+
+        ]);
+
+        return redirect()->route('site.admin.getIndex')->with('success', 'Pengguna berhasil ditambahkan');
+    }
     public function deleteUser($id)
     {
         $user = User::find($id);
-        $user->wishlist()->detach();
-        $user->delete();
 
-        return redirect()->route('site.admin.getIndex')->with('success', 'User deleted successfully');
+        if ($user) {
+            $user->wishlist()->detach();
+
+            $user->oneTimePasswords()->delete();
+
+            $user->delete();
+
+            return redirect()->route('site.admin.getIndex')->with('success', 'User deleted successfully');
+        } else {
+            return redirect()->route('site.admin.getIndex')->with('error', 'User not found');
+        }
     }
 
     public function updateUser(Request $request, $id)

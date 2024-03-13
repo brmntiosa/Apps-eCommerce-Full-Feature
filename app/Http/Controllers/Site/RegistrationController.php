@@ -20,6 +20,7 @@ class RegistrationController extends Controller
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->role = 'user';
         $user->save();
         Auth::login($user);
 

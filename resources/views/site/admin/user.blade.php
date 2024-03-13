@@ -13,6 +13,58 @@
         /* import google fonts */
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
+        .add-user-section button {
+            width: 15%;
+            margin-top: 15px;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            background-color: #4caf50;
+            color: white;
+            font-size: 1em;
+            border: none;
+        }
+
+        .add-user-section button:hover {
+            background-color: #45a049;
+        }
+
+        /* Tombol pada bagian .users .card */
+        .users .card button {
+            width: 80%;
+            /* Mengubah lebar tombol */
+            margin-top: 10px;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 10px;
+            background: transparent;
+            border: 1px solid #4AD489;
+            color: #4AD489;
+        }
+
+        .users .card button:hover {
+            background: #4AD489;
+            color: #fff;
+            transition: 0.5s;
+        }
+
+        /* Tombol pada bagian .table */
+        .table button {
+            padding: 6px 15px;
+            /* Mengubah ukuran tombol */
+            border-radius: 10px;
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid #4AD489;
+            color: #4AD489;
+        }
+
+        .table button:hover {
+            background: #4AD489;
+            color: #fff;
+            transition: 0.5s;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -356,6 +408,23 @@
                     </table>
                 </div>
             </section>
+            <div class="add-user-section">
+                <h2>Tambah Pengguna Baru</h2>
+                <form action="{{ route('site.admin.addUser') }}" method="post">
+                    @csrf
+                    <label for="name">Nama:</label>
+                    <input type="text" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" required>
+
+                    <label for="role">Role:</label>
+                    <select name="role" required>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <button type="submit" class="btn btn-success">Tambah Pengguna</button>
+                </form>
+            </div>
         </section>
     </div>
     <script>
