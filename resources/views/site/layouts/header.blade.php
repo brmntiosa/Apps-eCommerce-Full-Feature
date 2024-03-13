@@ -16,8 +16,9 @@
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="account_selection">
-                                    <li><a href="/sesi"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
-                                    <li><a href="/sesi/logout"><i class="fa fa-sign-in" aria-hidden="true"></i>logout</a></li>
+                                    <li><a href="/"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
+                                    <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
+
                                 </ul>
                             </li>
                         </ul>
