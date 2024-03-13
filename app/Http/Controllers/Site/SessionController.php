@@ -48,7 +48,7 @@ class SessionController extends Controller
     function logout()
     {
         Auth::logout();
-        return redirect('/login')->with('success', 'Berhasil logout. Harap Login kembali jika ingin mengakses detail Produk');
+        return redirect()->route('index.userLogin')->with('success', 'Berhasil logout. Harap Login kembali jika ingin mengakses detail Produk');
 
     }
 }

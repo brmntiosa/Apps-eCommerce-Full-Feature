@@ -49,26 +49,8 @@
 <!-- Main content here -->
 <div class="main_slider" style="background-image: url({{ asset('global/landingpage/images/slider_1.jpg') }})">
     <!-- Slider content here -->
-    @if(session('success'))
+    @if(Auth::check())
     <div class="row">
-        <div class="col text-center">
-            <div class="alert alert-success" id="welcomeMessage">
-                {{ session('success') }}
-            </div>
-        </div>
-    </div>
-    @endif
-    @if(session('suuccess'))
-    <div class="row">
-        <div class="col text-left">
-            <div class="alert alert-success" id="welcomeMessage">
-                {{ session('success') }}
-            </div>
-        </div>
-    </div>
-    @endif
-    @auth
-    <div class="row" id="welcomeMessage">
         <div class="col text-left">
             <div id="notification" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #FFE4C4; color: #333; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                 <span onclick="closeNotification()" style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 60px;">&times;</span>
@@ -86,8 +68,29 @@
             </script>
         </div>
     </div>
+@endif
 
 
+    @auth
+    <div class="row" id="welcomeMessage">
+        <div class="col text-left">
+            <div id="notification" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #FFE4C4; color: #333; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <span onclick="closeNotification()" style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 60px;">&times;</span>
+                <h2 style="font-family: 'Arial', sans-serif; margin: 0;">Selamat Datang, {{ Auth::user()->name }}!</h2>
+
+                <p style="font-size: 16px; margin-top: 10px;">Catatan: Semua fitur Sorting di sini telah diaktifkan, mulai dari penyesuaian berdasarkan kategori, harga, hingga pengurutan berdasarkan abjad.</p>
+            </div>
+
+            <script>
+                function closeNotification() {
+                    document.getElementById('notification').style.display = 'none';
+                }
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById('notification').style.display = 'block';
+                });
+            </script>
+        </div>
+    </div>
     @endauth
 </div>
 

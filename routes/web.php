@@ -25,16 +25,19 @@ use App\Models\Wishlist;
 
 
 //Login, Logout dan register
-Route::get('/sesi/logout', [SessionController::class, 'logout'])->name('logout')->middleware('auth');
+Route::get('/sesi/logout', [SessionController::class, 'logout'])->name('logoutuser')->middleware('auth');
 Route::get('/register', [UserController::class, 'loadRegister']);
 Route::post('/register', [UserController::class, 'userRegister'])->name('userRegister');
-Route::get('/login', function () {
-    return redirect('/');
-});
 Route::get('/', [UserController::class, 'loadLogin']);
-Route::post('/login', [UserController::class, 'userLogin'])->name('userLogin');
-Route::post('/login', [UserController::class, 'userLogin'])->name('login');
-Route::get('/verification/{id}', [UserController::class, 'verification']);
+Route::get('/login', [UserController::class, 'loadLogin'])->name('index.userLogin');
+Route::post('/login', [UserController::class, 'userLogin'])->name('process.userLogin');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+
+Route::get('/verification/process/{id}', [UserController::class, 'verificationProcess'])->name('process.verification');
+Route::get('/verification/register/{id}', [UserController::class, 'verificationRegisterIndex'])->name('indexRegister.verification');
+Route::get('/verification/login/{id}', [UserController::class, 'verificationLoginIndex'])->name('indexLogin.verification');
+
 Route::post('/verified', [UserController::class, 'verifiedOtp'])->name('verifiedOtp');
 Route::get('/resend-otp', [UserController::class, 'resendOtp'])->name('resendOtp');
 Route::get('/home', [HomeController::class, 'getIndex'])->name('site.home.getIndex');
@@ -69,7 +72,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //produk
-Route::get('/produk/{id}', 'App\Http\Controllers\Site\ProdukController@getIndex')->name('site.produk.getIndex');
 Route::middleware(['auth'])->group(function () {
     Route::get('/produk/{id}', [HomeController::class, 'show'])->name('site.produk.getIndex');
 });

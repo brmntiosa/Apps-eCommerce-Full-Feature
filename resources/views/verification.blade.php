@@ -61,12 +61,12 @@
 <div class="container">
     <p id="message_error" style="color:red;"></p>
     <p id="message_success" style="color:green;"></p>
-    <form method="post" id="verificationForm">
+    <form method="post" id="verificationForm" action="{{ route('verifiedOtp') }}">
         @csrf
         <input type="hidden" name="email" value="{{ $email }}">
         <input type="number" name="otp" placeholder="Enter OTP" required>
         <br><br>
-        <input type="submit" value="Verify">
+        <button type="submit">Verify</button>
     </form>
 
     <p class="time"></p>
@@ -78,28 +78,28 @@
 
 <script>
     $(document).ready(function () {
-        $('#verificationForm').submit(function (e) {
-            e.preventDefault();
+        // $('#verificationForm').submit(function (e) {
+        //     e.preventDefault();
 
-            var formData = $(this).serialize();
+        //     var formData = $(this).serialize();
 
-            $.ajax({
-                url: "{{ route('verifiedOtp') }}",
-                type: "POST",
-                data: formData,
-                success: function (res) {
-                    if (res.success) {
-                        alert(res.msg);
-                        window.open("/", "_self");
-                    } else {
-                        $('#message_error').text(res.msg);
-                        setTimeout(() => {
-                            $('#message_error').text('');
-                        }, 3000);
-                    }
-                }
-            });
-        });
+        //     $.ajax({
+        //         url: "{{ route('verifiedOtp') }}",
+        //         type: "POST",
+        //         data: formData,
+        //         success: function (res) {
+        //             if (res.success) {
+        //                 alert(res.msg);
+        //                 window.open("/", "_self");
+        //             } else {
+        //                 $('#message_error').text(res.msg);
+        //                 setTimeout(() => {
+        //                     $('#message_error').text('');
+        //                 }, 3000);
+        //             }
+        //         }
+        //     });
+        // });
 
         $('#resendOtpVerification').click(function () {
             $(this).text('Wait...');

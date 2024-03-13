@@ -79,7 +79,7 @@
                      @endif
                      <img src="{{ asset('global/login/Login_v1/images/img-01.png') }}" alt="IMG">
                  </div>
-                 <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
+                 <form class="login100-form validate-form" method="POST" action="{{ route('process.userLogin') }}">
                      @csrf
                      <span class="login100-form-title">
                          Member Login
@@ -94,8 +94,9 @@
                          </span>
                      </div>
                      <div class="container-login100-form-btn">
+<a href=""></a>
                          <button class="login100-form-btn" type="submit" name="submit">
-                             Login
+                             Login With otp
                          </button>
                      </div>
                      <div class="text-center p-t-12">
