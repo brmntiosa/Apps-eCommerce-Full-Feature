@@ -44,13 +44,10 @@ class AdminUserController extends Controller
         $user = User::find($id);
 
         if ($user) {
-            // Hapus data terkait dari tabel 'wishlist'
             $user->wishlist()->detach();
 
-            // Hapus data terkait dari tabel 'one_time_passwords'
             $user->oneTimePasswords()->delete();
 
-            // Hapus user
             $user->delete();
 
             return redirect()->route('site.admin.getIndex')->with('success', 'User deleted successfully');
