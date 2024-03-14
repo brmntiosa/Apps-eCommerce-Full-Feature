@@ -374,6 +374,7 @@
                 <div class="attendance-list">
                     <h1>Product List</h1>
                     <a href="{{ route('site.admin.addProduct') }}" class="btnn">Add Product</a>
+                    <h2>Total Products: {{ count($products) }}</h2>
                     <table class="table">
                         <thead>
                             <tr>

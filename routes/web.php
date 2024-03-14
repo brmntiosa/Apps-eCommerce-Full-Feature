@@ -47,7 +47,7 @@ Route::group(['middleware' => 'custom.login'], function () {
 });
 
 // Admin
-Route::get('/admin', [AdminController::class, 'index'])->name('site.admin.getIndex');
+Route::get('/admin', [AdminController::class, 'index'])->name('site.admin.dashboardGetIndex');
 Route::get('/admin/user', [AdminUserController::class, 'index'])->name('site.admin.getIndex');
 Route::delete('/admin/delete/{id}', [AdminUserController::class, 'deleteUser'])->name('site.admin.deleteUser');
 Route::get('/admin/edit/{id}', [AdminUserController::class, 'editUser'])->name('site.admin.editUser');
