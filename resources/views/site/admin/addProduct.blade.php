@@ -209,12 +209,12 @@
                         <div class="form-group">
                             <label for="productCategory">Product Category:</label>
                             <select name="product_category_id" id="productCategory" class="form-control" required>
-                                <option value="1">Tshirt</option>
-                                <option value="2">Pants</option>
-                                <option value="3">Accessories</option>
-                                <option value="4">Shoes</option>
+                                @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label for="price">Price:</label>
                             <input type="text" name="price" class="form-control" required>
