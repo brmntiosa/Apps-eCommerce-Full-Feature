@@ -272,6 +272,40 @@
         .submenu a:hover {
             background: #eee;
         }
+        .notification {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 800px; /* Ubah lebar notifikasi sesuai kebutuhan Anda */
+    z-index: 1000; /* Pastikan notifikasi muncul di atas konten lain */
+}
+
+.notification .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.notification-title {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    font-size: 20px;
+}
+
+.notification-content {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
     </style>
 </head>
 
@@ -314,7 +348,7 @@
 
 
                 <li>
-                    <a href="#" class="logout">
+                    <a href="/admin/logout" class="logout">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="nav-item">Log out</span>
                     </a>
@@ -331,6 +365,23 @@
             <section class="attendance">
                 <div class="attendance-list">
                     <h1>Selamat Datang di Halaman Dasboard Admin</h1>
+
+                    @if(Auth::check())
+                    <div id="notification" class="notification">
+                        <span class="close-btn" onclick="closeNotification()">&times;</span>
+                        <h2 class="notification-title">Selamat Datang Tuan Admin {{ Auth::user()->name }}!</h2>
+                        <p class="notification-content">Catatan: Semua fitur admin di sini telah diaktifkan, mulai dari controll terhadap users, Product, menambahkan product dan fitur lainya seperti category</p>
+                    </div>
+
+                    <script>
+                        function closeNotification() {
+                            document.getElementById('notification').style.display = 'none';
+                        }
+                        document.addEventListener('DOMContentLoaded', function() {
+                            document.getElementById('notification').style.display = 'block';
+                        });
+                    </script>
+                @endif
 
                 </div>
             </section>

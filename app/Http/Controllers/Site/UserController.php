@@ -27,7 +27,6 @@ class UserController extends Controller
         $request->validate([
             'name' => 'string|required|min:2',
             'email' => 'string|email|required|max:100',
-            'role' => 'string|in:user,admin',
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -37,7 +36,6 @@ class UserController extends Controller
             $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->role = $request->role;
             $user->save();
 
             // Create OneTimePassword record
@@ -80,29 +78,24 @@ class UserController extends Controller
                     ->where('valid_until', '>=', now())
                     ->first();
 
-                // Jika pengguna memiliki OTP yang belum digunakan, arahkan ke halaman verifikasi
-                if ($otpData) {
-                    $this->sendOtp($userData);
-
-                    return redirect()->route('indexRegister.verification', $userData->id);
-
+                // Jika pengguna belum memiliki OTP yang valid, kirim OTP baru
+                if (!$otpData) {
+                    $this->createOneTimePassword($userData);
                 }
-            }else{
-                return redirect()->route('indexLogin.verification', $userData->id);
 
-            }
-
-            // Kirim OTP baru dan arahkan ke halaman verifikasi
-            $this->sendOtp($userData);
-                return route('indexLogin.verification', $userData->id);
-
+                // Redirect ke halaman verifikasi
+                return redirect()->route('indexRegister.verification', $userData->id);
             } else {
-                // Jika pengguna tidak ditemukan, kembalikan ke halaman login dengan pesan kesalahan
-                return redirect('/')->with('error', 'User not found.');
+                // Jika pengguna telah diverifikasi, kirim OTP baru dan arahkan ke halaman verifikasi login
+                $this->sendOtp($userData);
+                return redirect()->route('indexLogin.verification', $userData->id);
+            }
+        } else {
+            // Jika pengguna tidak ditemukan, kembalikan ke halaman login dengan pesan kesalahan
+            return redirect('/')->with('error', 'User not found.');
         }
+    }
 
-
-}
 
 
     public function loadDashboard()
@@ -155,18 +148,6 @@ class UserController extends Controller
     Auth::logout();
     return redirect('/')->with('success', 'You have been logged out successfully.');
 }
-    // public function verificationProcess($id)
-    // {
-    //     try {
-    //         $user = User::where('id', $id)->first();
-    //         $this->sendOtp($user);
-    //         dd("Tes");
-    //         return redirect()->route('site.home.getIndex');
-    //     } catch (\Throwable $th) {
-    //         dd($th);
-    //     }
-
-    // }
 
    public function verifiedOtp(Request $request)
    {
@@ -193,7 +174,7 @@ class UserController extends Controller
            if ($user->role == 'user') {
                return redirect()->route('site.home.getIndex')->with('message', ['success' => true, 'msg' => 'Mail has been verified']);
            }
-               return redirect()->route('site.admin.getIndex')->with('message', ['success' => true, 'msg' => 'Mail has been verified']);
+               return redirect()->route('site.admin.dashboardGetIndex')->with('message', ['success' => true, 'msg' => 'Mail has been verified']);
            }
        }
 
@@ -232,7 +213,7 @@ class UserController extends Controller
             'user_id' => $user->id,
             'otp_code' => $otp,
             'is_used' => false,
-            'valid_until' => now()->addMinutes(5), // You can adjust the validity period
+            'valid_until' => $time, // You can adjust the validity period
         ]);
 
         // Send OTP via email (you can modify this part based on your email sending logic)
@@ -268,4 +249,6 @@ class UserController extends Controller
             $message->to($data['email'])->subject($data['title']);
         });
     }
+
 }
+
