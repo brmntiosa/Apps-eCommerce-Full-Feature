@@ -70,11 +70,14 @@ class AdminProductController extends Controller
 
     public function layoutAddProduct()
     {
-        return view('site.admin.addProduct');
+        $categories = ProductCategory::all();
+
+        return view('site.admin.addProduct')->with(['categories' => $categories]);
     }
 
     public function addProduct(Request $request)
     {
+
         $request->validate([
             'name' => 'required',
             'description' => 'required',
