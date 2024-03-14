@@ -54,6 +54,14 @@
             border-radius: 4px;
             cursor: pointer;
         }
+        #Verify{
+            background-color: #339623;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -66,7 +74,7 @@
         <input type="hidden" name="email" value="{{ $email }}">
         <input type="number" name="otp" placeholder="Enter OTP" required>
         <br><br>
-        <button type="submit">Verify</button>
+        <button type="submit" id="Verify">Verify</button>
     </form>
 
     <p class="time"></p>

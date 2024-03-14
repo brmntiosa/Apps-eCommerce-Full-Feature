@@ -161,16 +161,15 @@ class UserController extends Controller
        if (!$otpData) {
            return response()->json(['success' => false, 'msg' => 'You entered wrong OTP or the OTP has expired']);
        } else {
-           // Mark the OTP as used
+
            $otpData->update(['is_used' => true]);
 
-           // Mark the user as verified
+
            User::where('id', $user->id)->update(['is_verified' => 1]);
 
-           // Log in the user
+
            Auth::loginUsingId($user->id);
 
-           // Redirect based on user role
            if ($user->role == 'user') {
                return redirect()->route('site.home.getIndex')->with('message', ['success' => true, 'msg' => 'Mail has been verified']);
            }
@@ -213,10 +212,10 @@ class UserController extends Controller
             'user_id' => $user->id,
             'otp_code' => $otp,
             'is_used' => false,
-            'valid_until' => $time, // You can adjust the validity period
+            'valid_until' => $time,
         ]);
 
-        // Send OTP via email (you can modify this part based on your email sending logic)
+
         $data['email'] = $user->email;
         $data['title'] = 'Mail Verification';
         $data['body'] = 'Your OTP is: ' . $otp;
@@ -236,7 +235,7 @@ class UserController extends Controller
                 'user_id' => $user->id,
                 'otp_code' => $otp,
                 'is_used' => false,
-                'valid_until' => now()->addMinutes(5), // You can adjust the validity period
+                'valid_until' => now()->addMinutes(1), // You can adjust the validity period
             ]
         );
 
