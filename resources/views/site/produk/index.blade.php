@@ -134,7 +134,9 @@
             <div class="product_details">
                 <div class="product_details_title">
                     <h2>{{$products->name}}</h2>
+                    <h6>Category: {{ $products->productCategory->name }}</h6>
                     <p>{{$products->description}}</p>
+
                 </div>
                 <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
                     <span class="ti-truck"></span><span>free delivery</span>
@@ -159,6 +161,9 @@
                         <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>

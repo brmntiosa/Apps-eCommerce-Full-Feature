@@ -24,7 +24,8 @@ class HomeController extends Controller
     public function show($id)
     {
 
-        $products = Product::with('productImage')->where('id', $id)->first();
+        $products = Product::with('productImage', 'productCategory')->where('id', $id)->first();
+
         return view('site.produk.index', ['products' => $products]);
     }
     public function wishlist()
