@@ -52,6 +52,11 @@ class AdminCategoriController extends Controller
     public function deleteCategory($id)
     {
         $category = ProductCategory::find($id);
+
+        if ($category->products()->exists()) {
+            return redirect()->route('site.admin.category.index')->with('error', 'Category cannot be deleted as it contains products');
+        }
+
         $category->delete();
 
         return redirect()->route('site.admin.category.index')->with('success', 'Category deleted successfully');
