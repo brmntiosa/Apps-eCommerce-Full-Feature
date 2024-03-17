@@ -26,6 +26,8 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // ...
         'custom.login' => \App\Http\Middleware\CustomLoginMiddleware::class,
+        'redirectIfUser' => \App\Http\Middleware\RedirectIfUser::class,
+        'redirectIfAdmin' => \App\Http\Middleware\RedirectIfAdmin::class,
     ];
 
     /**
