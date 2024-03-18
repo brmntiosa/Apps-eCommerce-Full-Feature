@@ -31,7 +31,7 @@ Route::get('/register', [UserController::class, 'loadRegister']);
 Route::post('/register', [UserController::class, 'userRegister'])->name('userRegister');
 Route::get('/', [UserController::class, 'loadLogin']);
 Route::get('/login', [UserController::class, 'loadLogin'])->name('index.userLogin');
-Route::post('/login', [UserController::class, 'userLogin'])->name('process.userLogin');
+Route::post('/login', [UserController::class, 'userLogin'])->name('process.userLogin')->middleware('throttle:login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 
