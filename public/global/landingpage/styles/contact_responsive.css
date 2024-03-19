@@ -1,7 +1,6 @@
 @charset "utf-8";
 
 
-
 @media only screen and (max-width: 1600px) {}
 
 /************
@@ -458,4 +457,9 @@
 14. 400px
 ************/
 
-@media only screen and (max-width: 400px) {}
+
+
+@media only screen and (max-width: 400px)
+{
+	
+}
