@@ -24,7 +24,7 @@
             background: rgb(226, 226, 226);
         }
 
-        nav {
+        /* nav {
             position: sticky;
             top: 0;
             bottom: 0;
@@ -39,7 +39,7 @@
         nav:hover {
             width: 280px;
             transition: 1s;
-        }
+        } */
 
         .logo {
             text-align: center;

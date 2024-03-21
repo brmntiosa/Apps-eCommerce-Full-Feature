@@ -82,6 +82,7 @@
                  <form class="login100-form validate-form" method="POST" action="{{ route('process.userLogin') }}">
                      @csrf
                      <span class="login100-form-title">
+                        <h1>Halo tuan tio ganteng Selamat datang kembali</h1>
                          Member Login
                      </span>
                      <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
