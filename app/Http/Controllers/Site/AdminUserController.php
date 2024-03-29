@@ -37,7 +37,7 @@ class AdminUserController extends Controller
 
         ]);
 
-        return redirect()->route('site.admin.getIndex')->with('success', 'Pengguna berhasil ditambahkan');
+        return redirect()->route('getIndex.users')->with('success', 'Pengguna berhasil ditambahkan');
     }
     public function deleteUser($id)
     {
@@ -50,9 +50,9 @@ class AdminUserController extends Controller
 
             $user->delete();
 
-            return redirect()->route('site.admin.getIndex')->with('success', 'User deleted successfully');
+            return redirect()->route('getIndex.users')->with('success', 'User deleted successfully');
         } else {
-            return redirect()->route('site.admin.getIndex')->with('error', 'User not found');
+            return redirect()->route('getIndex.users')->with('error', 'User not found');
         }
     }
 
@@ -64,6 +64,6 @@ class AdminUserController extends Controller
             'email' => $request->input('email'),
         ]);
 
-        return redirect()->route('site.admin.getIndex')->with('success', 'User updated successfully');
+        return redirect()->route('getIndex.users')->with('success', 'User updated successfully');
     }
 }

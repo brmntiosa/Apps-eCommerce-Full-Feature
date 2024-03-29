@@ -23,6 +23,6 @@ class KategoriController extends Controller
             $products = Product::where('status', 'active')->get(); // Tambahkan kondisi status 'active'
         }
 
-        return view('site.kategori.index', ['categories' => $categories, 'products' => $products]);
+        return view('site.kategori.index', ['categories' => $categories, 'products' => $products])->with('success', 'Product deleted successfully');
     }
 }

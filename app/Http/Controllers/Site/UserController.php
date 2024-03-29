@@ -47,10 +47,10 @@ class UserController extends Controller
             if ($user->is_verified == 0) {
                 // Jika belum diverifikasi, kirim OTP dan arahkan ke halaman verifikasi
                 $this->sendOtp($user);
-                return redirect( )->route('indexRegister.verification', $user->id);
+                return redirect()->route('indexRegister.verification', $user->id);
             } else {
                 // Jika sudah diverifikasi, berikan tanggapan atau arahkan ke halaman selanjutnya
-              return redirect()->route('index.userLogin', $user->id);
+                return redirect()->route('index.userLogin', $user->id);
             }
         }
     }
@@ -130,7 +130,6 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             dd($th);
         }
-
     }
     public function verificationRegisterIndex($id)
     {
@@ -141,67 +140,66 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             dd($th);
         }
-
     }
     public function logout()
-{
-    Auth::logout();
-    return redirect('/')->with('success', 'You have been logged out successfully.');
-}
+    {
+        Auth::logout();
+        return redirect('/')->with('success', 'You have been logged out successfully.');
+    }
 
-   public function verifiedOtp(Request $request)
-   {
-       $user = User::where('email', $request->email)->first();
-       $otpData = OneTimePassword::where('user_id', $user->id)
-           ->where('otp_code', $request->otp)
-           ->where('is_used', false)
-           ->where('valid_until', '>=', now())
-           ->first();
+    public function verifiedOtp(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        $otpData = OneTimePassword::where('user_id', $user->id)
+            ->where('otp_code', $request->otp)
+            ->where('is_used', false)
+            ->where('valid_until', '>=', now())
+            ->first();
 
-       if (!$otpData) {
-           return response()->json(['success' => false, 'msg' => 'You entered wrong OTP or the OTP has expired']);
-       } else {
+        if (!$otpData) {
+            return response()->json(['success' => false, 'msg' => 'You entered wrong OTP or the OTP has expired']);
+        } else {
 
-           $otpData->update(['is_used' => true]);
-
-
-           User::where('id', $user->id)->update(['is_verified' => 1]);
+            $otpData->update(['is_used' => true]);
 
 
-           Auth::loginUsingId($user->id);
-
-           if ($user->role == 'user') {
-               return redirect()->route('site.home.getIndex')->with('message', ['success' => true, 'msg' => 'Mail has been verified']);
-           }
-               return redirect()->route('site.admin.dashboardGetIndex')->with('message', ['success' => true, 'msg' => 'Mail has been verified']);
-           }
-       }
+            User::where('id', $user->id)->update(['is_verified' => 1]);
 
 
-   public function resendOtp(Request $request)
-   {
-       $user = User::where('email', $request->email)->first();
+            Auth::loginUsingId($user->id);
 
-       if (!$user) {
-           return response()->json(['success' => false, 'msg' => 'Email not found']);
-       }
+            if ($user->role == 'user') {
+                return redirect()->route('site.home.getIndex')->with('message', ['success' => true, 'msg' => 'Mail has been verified']);
+            }
+            return redirect()->route('site.admin.dashboardGetIndex')->with('message', ['success' => true, 'msg' => 'Mail has been verified']);
+        }
+    }
 
-       $otpData = OneTimePassword::where('user_id', $user->id)->first();
 
-       if (!$otpData) {
-           return response()->json(['success' => false, 'msg' => 'No OTP data found']);
-       }
+    public function resendOtp(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
 
-       $currentTime = time();
-       $time = strtotime($otpData->valid_until);
+        if (!$user) {
+            return response()->json(['success' => false, 'msg' => 'Email not found']);
+        }
 
-       if ($currentTime >= $time && $time >= $currentTime - (90 + 5)) {
-           return response()->json(['success' => false, 'msg' => 'Please try after some time']);
-       } else {
-           $this->sendOtp($user);
-           return response()->json(['success' => true, 'msg' => 'OTP has been sent']);
-       }
-   }
+        $otpData = OneTimePassword::where('user_id', $user->id)->first();
+
+        if (!$otpData) {
+            return response()->json(['success' => false, 'msg' => 'No OTP data found']);
+        }
+
+        $currentTime = time();
+        $time = strtotime($otpData->valid_until);
+
+        if ($currentTime >= $time && $time >= $currentTime - (90 + 5)) {
+            return response()->json(['success' => false, 'msg' => 'Please try after some time']);
+        } else {
+            $this->sendOtp($user);
+            return response()->json(['success' => true, 'msg' => 'OTP has been sent']);
+        }
+    }
 
     private function createOneTimePassword($user)
     {
@@ -235,7 +233,7 @@ class UserController extends Controller
                 'user_id' => $user->id,
                 'otp_code' => $otp,
                 'is_used' => false,
-                'valid_until' => now()->addMinutes(1), // You can adjust the validity period
+                'valid_until' => now()->addMinutes(5)
             ]
         );
 
@@ -248,6 +246,4 @@ class UserController extends Controller
             $message->to($data['email'])->subject($data['title']);
         });
     }
-
 }
-

@@ -54,7 +54,6 @@ Route::group(['middleware' => 'redirectIfAdmin'], function () {
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/produk/{id}', [HomeController::class, 'show'])->name('site.produk.getIndex');
-
     });
     Route::middleware(['auth'])->group(function () {
         Route::get('/wishlist', [WishlistController::class, 'index'])->name('site.wishlist.index');
@@ -66,7 +65,7 @@ Route::group(['middleware' => 'redirectIfAdmin'], function () {
 Route::group(['middleware' => 'redirectIfUser'], function () {
 
     Route::get('/admin', [AdminController::class, 'index'])->name('site.admin.dashboardGetIndex');
-    Route::get('/admin/user', [AdminUserController::class, 'index'])->name('site.admin.getIndex');
+    Route::get('/admin/user', [AdminUserController::class, 'index'])->name('getIndex.users');
     Route::delete('/admin/delete/{id}', [AdminUserController::class, 'deleteUser'])->name('site.admin.deleteUser');
     Route::get('/admin/edit/{id}', [AdminUserController::class, 'editUser'])->name('site.admin.editUser');
     Route::put('/admin/update/{id}', [AdminUserController::class, 'updateUser'])->name('site.admin.updateUser');
@@ -79,8 +78,7 @@ Route::group(['middleware' => 'redirectIfUser'], function () {
     Route::get('/admin/product/edit/{id}', [AdminProductController::class, 'editProduct'])->name('site.admin.editProduct');
     Route::put('/admin/product/update/{id}', [AdminProductController::class, 'updateProduct'])->name('site.admin.updateProduct');
     Route::get('/admin/product/add', [AdminProductController::class, 'layoutAddProduct'])->name('site.admin.addProduct');
-    Route::post('/admin/product/add', [AdminProductController::class, 'addProduct'])->name('site.admin.addProduct');
-
+    Route::post('/admin/product/add', [AdminProductController::class, 'addProduct'])->name('admin.addProduct');
 });
 Route::get('/admin/logout', [AdminProductController::class, 'logout'])->name('logout')->middleware('auth');
 
@@ -92,7 +90,3 @@ Route::get('/admin/logout', [AdminProductController::class, 'logout'])->name('lo
 
 
 //produk
-
-
-
-
