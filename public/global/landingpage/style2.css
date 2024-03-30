@@ -15,7 +15,7 @@ body {
 .container-custom {
     display: flex;
     align-items: center;
-    padding: 100px 30px 100px 230px;
+    padding: 25px 30px 25px 230px;
     width: 100%;
     min-height: 100vh;
     background-color: #f7f7f771;

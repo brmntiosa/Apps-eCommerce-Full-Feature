@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Product;
-use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use App\Models\ProductCategory;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -15,8 +16,10 @@ class AdminProductController extends Controller
     public function index()
     {
         $products = Product::paginate(12);
+        $currentAdmin = Auth::user(); // Mengambil admin yang sedang login
+        $users = User::where('id', $currentAdmin->id)->get(); // Hanya mengambil data admin yang sedang login
 
-        return view('site.admin.product', ['products' => $products]);
+        return view('site.admin.product', ['products' => $products, 'users' => $users]);
     }
 
     public function editProduct($id)
