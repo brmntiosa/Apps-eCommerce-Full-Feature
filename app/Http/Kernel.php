@@ -26,8 +26,8 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // ...
         'custom.login' => \App\Http\Middleware\CustomLoginMiddleware::class,
-        'redirectIfUser' => \App\Http\Middleware\RedirectIfUser::class,
-        'redirectIfAdmin' => \App\Http\Middleware\RedirectIfAdmin::class,
+        'isUser' => \App\Http\Middleware\IsUser::class,
+        'isAdmin' => \App\Http\Middleware\IsAdmin::class,
     ];
 
     /**
@@ -47,7 +47,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];

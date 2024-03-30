@@ -12,7 +12,6 @@ class HomeController extends Controller
 {
     public function getIndex()
     {
-
         $products = Product::with(['productImage', 'productCategory'])
             ->where('status', 'active') // Menambahkan kondisi untuk status active
             ->get();
