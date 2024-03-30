@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Product;
-use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use App\Models\ProductCategory;
+use App\Http\Controllers\Controller;
 
 class ProdukController extends Controller
 {
@@ -13,8 +14,6 @@ class ProdukController extends Controller
     {
         $products = Product::with('productImage', 'productCategory')->get();
 
-        dd($products);
         return view('site.produk.index', ['products' => $products]);
-
     }
 }

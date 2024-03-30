@@ -77,6 +77,80 @@
                 font-family: "DM Sans", sans-serif;
                 /* Change font family to Elegant Font */
             }
+
+            .about {
+                position: relative;
+                width: 50px;
+                height: 50px;
+
+                background-color: #ffffffc2;
+                align-items: center;
+                justify-content: center;
+                border-radius: 5px;
+
+                display: flex;
+            }
+
+            .img-info {
+                width: 40px;
+            }
+
+            /* .box-main {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            position: absolute;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            top: 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        } */
+
+            .breadcrumbs-profile {
+                position: relative;
+                width: 225px;
+                height: 50px;
+                border-radius: 5px;
+                margin-right: 10px;
+                margin-left: 5px;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                background-color: #ffffffc2;
+            }
+
+            .notify {
+
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            .second-box {
+                position: relative;
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+                background-color: #dfdfdf9e;
+                border-radius: 5px;
+                align-items: center;
+                justify-content: center;
+                display: flex
+            }
+
+            .profile-users {
+                position: relative;
+                width: 110px;
+                font-size: 10px;
+                margin-right: 25px;
+                border-radius: 5px;
+
+                height: 40px;
+                /* word-wrap: break-word; */
+
+
+            }
+
+            .email-teks {
+                /* position: relative;
+                                                                                                                                                                                        padding-bottom: 50px; */
+                transform: translateY(-38%);
+                word-wrap: break-word;
+            }
         </style>
     </head>
 
@@ -95,14 +169,33 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div class="about">
+                    <div class="about">
+                        <a href="#">
 
+                            <img src="{{ asset('global/landingpage') }}/images/info.png" class="img-info" alt="">
+                        </a>
+                    </div>
+                    <div class="breadcrumbs-profile">
+                        <div class="second-box">
+
+                            <div class="notify">ON</div>
+                        </div>
+                        <div class="profile-users">
+                            @foreach ($users as $user)
+                                <h6>{{ Auth::user()->name }}</h6>
+                                <p class="email-teks">{{ Auth::user()->email }}</p>
+                            @endforeach
+                        </div>
+                        <a href="#">
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
+
             <section class="main">
                 <div class="main-top">
-                    <h1>Products</h1>
+                    <h4>Products</h4>
                     <i class="fas fa-shopping-bag"></i>
                 </div>
                 @if (session('success'))
