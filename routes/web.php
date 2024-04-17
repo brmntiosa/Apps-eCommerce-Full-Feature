@@ -39,6 +39,7 @@ Route::get('/verification/process/{id}', [UserController::class, 'verificationPr
 Route::get('/verification/register/{id}', [UserController::class, 'verificationRegisterIndex'])->name('indexRegister.verification');
 Route::get('/verification/login/{id}', [UserController::class, 'verificationLoginIndex'])->name('indexLogin.verification');
 
+
 Route::post('/verified', [UserController::class, 'verifiedOtp'])->name('verifiedOtp');
 Route::get('/resend-otp', [UserController::class, 'resendOtp'])->name('resendOtp');
 
@@ -60,6 +61,7 @@ Route::group(['middleware' => 'redirectIfAdmin'], function () {
         Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('site.wishlist.addToWishlist');
         Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'removeFromWishlist'])->name('site.wishlist.removeFromWishlist');
     });
+    
 });
 
 Route::group(['middleware' => 'redirectIfUser'], function () {
@@ -83,6 +85,7 @@ Route::group(['middleware' => 'redirectIfUser'], function () {
 Route::get('/admin/logout', [AdminProductController::class, 'logout'])->name('logout')->middleware('auth');
 
 
+
 //kategori
 
 
@@ -90,3 +93,6 @@ Route::get('/admin/logout', [AdminProductController::class, 'logout'])->name('lo
 
 
 //produk
+Route::get('/details-products', function () {
+    return view('site.admin.catalog.details_products');
+});

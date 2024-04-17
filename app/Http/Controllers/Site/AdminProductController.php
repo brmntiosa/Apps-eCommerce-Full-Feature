@@ -19,6 +19,7 @@ class AdminProductController extends Controller
         $currentAdmin = Auth::user(); // Mengambil admin yang sedang login
         $users = User::where('id', $currentAdmin->id)->get(); // Hanya mengambil data admin yang sedang login
 
+
         return view('site.admin.product', ['products' => $products, 'users' => $users]);
     }
 
@@ -51,6 +52,11 @@ class AdminProductController extends Controller
     {
         $product = Product::find($id);
 
+        // Pastikan produk ditemukan
+        if (!$product) {
+            return redirect()->route('site.admin.getIndex')->with('error', 'Product not found');
+        }
+
         // Pastikan nilai 'status' yang diterima adalah salah satu dari nilai yang diizinkan
         $allowedStatus = ['active', 'non-active'];
         $status = $request->input('status');
@@ -60,6 +66,7 @@ class AdminProductController extends Controller
             return redirect()->route('site.admin.getIndex')->with('error', 'Invalid status value');
         }
 
+        // Update data produk
         $product->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -67,8 +74,14 @@ class AdminProductController extends Controller
             'status' => $status,
         ]);
 
-        return redirect()->route('site.admin.getIndex')->with('success', 'Product updated successfully');
+        // Periksa apakah pembaruan berhasil
+        if ($product) {
+            return redirect()->route('site.admin.getIndex')->with('success', 'Produk berhasil di update');
+        } else {
+            return redirect()->route('site.admin.getIndex')->with('error', 'Gagal mengupdate produk');
+        }
     }
+
 
 
     public function layoutAddProduct()

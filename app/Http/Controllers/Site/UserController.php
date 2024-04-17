@@ -210,7 +210,7 @@ class UserController extends Controller
             'user_id' => $user->id,
             'otp_code' => $otp,
             'is_used' => false,
-            'valid_until' => $time,
+            'valid_until' => now()->addMinutes(5)
         ]);
 
 

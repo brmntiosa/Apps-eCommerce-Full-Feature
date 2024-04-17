@@ -60,44 +60,34 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="active">
-                        <a href="/admin/product">
-                            <i class="icon ph-bold ph-file-text"></i>
-                            <span class="text">Product</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/categories">
-                            <i class="icon ph-bold ph-list"></i>
 
-                            <span class="text">Categories</span>
-                        </a>
-                    </li>
                     <li>
                         <a href="#">
-                            <i class="icon ph-bold ph-chart-bar"></i>
-                            <span class="text">Income</span>
+                            <i><img class="catalog" src="{{ asset('global/landingpage') }}/images/catalog.png"></i>
+                            <span class="text">Catalog</span>
                             <i class="arrow ph-bold ph-caret-down"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li>
-                                <a href="#">
-                                    <span class="text">Earnings</span>
+                            <li class="active">
+                                <a href="/admin/product">
+                                    <i class="icon ph-bold ph-file-text"></i>
+                                    <span class="text">Product</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <span class="text">Funds</span>
+                                <a href="/admin/categories">
+                                    <i class="icon ph-bold ph-list"></i>
+
+                                    <span class="text">Categories</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <span class="text">Declines</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="text">Payouts</span>
+                                <a href="">
+                                    <i>
+                                        <img src="{{ asset('global/landingpage') }}/images/delivery-service.png"
+                                            alt="">
+                                    </i>
+                                    <span class="text">Orders</span>
                                 </a>
                             </li>
                         </ul>

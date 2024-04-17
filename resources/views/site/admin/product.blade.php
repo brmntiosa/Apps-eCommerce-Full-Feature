@@ -1,6 +1,5 @@
 @extends('site.admin.layouts.main')
 
-
 @section('title')
 @endsection
 
@@ -21,143 +20,14 @@
         <link
             href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Pacifico&family=Sofia+Sans:wght@100&display=swap"
             rel="stylesheet">
-        <style>
-            .breadcrumbs ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-
-            .breadcrumbs ul li {
-                display: inline;
-                font-size: 14px;
-            }
-
-            .breadcrumbs ul li a {
-                text-decoration: none;
-                color: #5555554c;
-                transition: color 0.3s;
-            }
-
-            .breadcrumbs ul li a:hover {
-                color: #007bff;
-            }
-
-            .breadcrumbs ul li i {
-                margin: 0 5px;
-                color: #89898961;
-            }
-
-            .breadcrumbs ul li.active a {
-                color: #000000b4;
-                text-decoration: underline;
-            }
-
-            .box-main {
-                position: relative;
-                width: 100%;
-                border-radius: 10px;
-                height: 70px;
-                padding: 10px;
-                background-color: #dcdcdcc0
-            }
-
-            .teks {
-                position: absolute;
-                top: 20px;
-
-            }
-
-            .breadcrumbs ul li a {
-                text-decoration: none;
-                color: #9e9e9e8b;
-                transition: color 0.3s;
-                font-size: 18px;
-                /* Change font size to 50px */
-                font-family: "DM Sans", sans-serif;
-                /* Change font family to Elegant Font */
-            }
-
-            .about {
-                position: relative;
-                width: 50px;
-                height: 50px;
-
-                background-color: #ffffffc2;
-                align-items: center;
-                justify-content: center;
-                border-radius: 5px;
-
-                display: flex;
-            }
-
-            .img-info {
-                width: 40px;
-            }
-
-            /* .box-main {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            position: absolute;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            top: 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        } */
-
-            .breadcrumbs-profile {
-                position: relative;
-                width: 225px;
-                height: 50px;
-                border-radius: 5px;
-                margin-right: 10px;
-                margin-left: 5px;
-                justify-content: center;
-                align-items: center;
-                display: flex;
-                background-color: #ffffffc2;
-            }
-
-            .notify {
-
-                justify-content: center;
-                align-items: center;
-
-            }
-
-            .second-box {
-                position: relative;
-                width: 40px;
-                height: 40px;
-                margin-right: 10px;
-                background-color: #dfdfdf9e;
-                border-radius: 5px;
-                align-items: center;
-                justify-content: center;
-                display: flex
-            }
-
-            .profile-users {
-                position: relative;
-                width: 110px;
-                font-size: 10px;
-                margin-right: 25px;
-                border-radius: 5px;
-
-                height: 40px;
-                /* word-wrap: break-word; */
-
-
-            }
-
-            .email-teks {
-                /* position: relative;
-                                                                                                                                                                                        padding-bottom: 50px; */
-                transform: translateY(-38%);
-                word-wrap: break-word;
-            }
-        </style>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     </head>
 
     <body>
 
 
-        <div class="box">
+        <div class="box pb-3">
             <div class="box-main">
                 <div class="row">
                     <div class="col">
@@ -171,7 +41,6 @@
                     </div>
                     <div class="about">
                         <a href="#">
-
                             <img src="{{ asset('global/landingpage') }}/images/info.png" class="img-info" alt="">
                         </a>
                     </div>
@@ -192,62 +61,136 @@
                     </div>
                 </div>
             </div>
+            <div class="container mt-2">
+                <div class="row d-flex flex-row  rounded p-2">
+                    <div class="col">
+                        <h4 class="teks2">Products <span class="count">({{ count($products) }})</span></h4>
+                    </div>
 
-            <section class="main">
-                <div class="main-top">
-                    <h4>Products</h4>
-                    <i class="fas fa-shopping-bag"></i>
+                    <div class="col d-flex flex-row justify-between gap-3">
+                        <form action="">
+                            <div class="search">
+                                <span class="material-symbols-outlined">
+                                    search
+                                </span>
+                                <input type="search" name="" id="" class="search-input"
+                                    placeholder="Search">
+                            </div>
+                        </form>
+                        <div class="d-flex flex-row align-items-center gap-1 bg-teal rounded p-2 red-custom">
+                            <img src="{{ asset('global/landingpage') }}/images/sort.png" class="iconsort" alt="">
+                            <span>Sort</span>
+                        </div>
+
+                        <a href="{{ route('admin.addProduct') }}" class="btn">
+                            <button type="button" class="btn btn-outline-primary " style="text-wrap:nowrap">Add
+                                product</button>
+                        </a>
+                    </div>
                 </div>
+
+            </div>
+            <div class="inner-line"></div>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link active" data-target="#mainProducts" href="/admin/product">Main
+                            Products</a>
+                        <a class="nav-item nav-link" href="#" data-target="#detailsProducts"
+                            href="/details-products">Details Products</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="inner-bottom mt-2"></div>
+
+            <div class="main-top pt-3">
+
+
+
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
-                        <button class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+                        <button class="btn-close-white float-end" onclick="this.parentElement.style.display='none'"
+                            style="width: 100px; height:30px";>&times;</button>
                     </div>
                 @endif
                 <section class="attendance">
                     <div class="attendance-list">
                         <div class="attendance-list">
-                            <div class="row">
-                                <div class="col">
-                                    <br>
-                                    <h6>Total Products: {{ count($products) }}</h6>
-                                </div>
-                                <div class="col text-end">
-
-                                    <a href="{{ route('admin.addProduct') }}" class="btn">
-                                        <button type="button" class="btn btn-outline-primary">Add
-                                            product</button>
-                                    </a>
-                                </div>
-                            </div>
 
                             {{-- <table class="table table-hover">
                                 <!-- Table content here -->
 
                             </table> --}}
                         </div>
-                        <table class="table table-hover">
+                        <table class="table table-hover" style="border-bottom: none; ">
 
-                            <thead class="table table-light">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Description</th>
+                            <thead class="table table-light rounded p-2" style="border-bottom: none; ">
+                                <tr style="border-right: none;">
+                                    <th style="border-bottom: none; ">ID</th>
+                                    <th>Product</th>
                                     <th>Price</th>
+                                    <th>inventory</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach ($products as $product)
                                     <tr>
                                         <td>{{ $product->id }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->productCategory->name }}</td>
-                                        <td>{{ $product->description }}</td>
+                                        <td class="product-item">
+                                            <div style="display: flex; align-items: center;">
+                                                <img src="{{ asset($product->productImage->first()->url) }}"
+                                                    alt="{{ $product->name }}" width="80" style="margin-right: 10px;">
+                                                <div>
+                                                    <h6 style="margin-bottom: 5px;">{{ $product->name }}</h6>
+                                                    <div class="box-category"
+                                                        style="background-color: #dbdbdb7a; border-radius: 5px; width: 100px">
+                                                        <p
+                                                            style="max-width: 100px; overflow: hidden;  white-space: nowrap; font-size: 13px;">
+                                                            {{ $product->productCategory->name }}</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </td>
+
                                         <td>{{ $product->price }}</td>
-                                        <td>{{ $product->status }}</td>
+                                        <td>
+                                            <div class="container text-wrap">
+                                                <span style="color: #979797e1">
+                                                    <h6 style="display: inline; margin: 0; color: #000000;">
+                                                        {{ $product->stock }}</h6>
+                                                    Stock
+                                                </span>
+                                            </div>
+
+
+                                        </td>
+
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="statusDropdown{{ $product->id }}" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    {{ $product->status }}
+                                                </button>
+                                                <ul class="dropdown-menu"
+                                                    aria-labelledby="statusDropdown{{ $product->id }}">
+                                                    <li><a class="dropdown-item" href="#"
+                                                            onclick="updateStatus('{{ $product->id }}', 'active')">Active</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="#"
+                                                            onclick="updateStatus('{{ $product->id }}', 'non-active')">Non-active</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+
+
                                         <td>
                                             <button class="btn btn-edit"
                                                 onclick="editProduct({{ $product->id }})">Edit</button>
@@ -258,6 +201,7 @@
                                                 <button type="submit" class="btn btn-delete"
                                                     onclick="return confirm('Apakah Benar ingin menghapus?')">Delete</button>
                                             </form>
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -267,18 +211,90 @@
                         {{ $products->withquerystring()->links('pagination::bootstrap-5') }}
                     </div>
                 </section>
-            </section>
-        </div>
+                </section>
+
+            </div>
+
+
+
+
+            <script>
+                function updateStatus(productId, status) {
+                    // Send AJAX request to update status
+                    fetch('/update-status', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}' // Assuming you're using CSRF protection
+                            },
+                            body: JSON.stringify({
+                                productId: productId,
+                                status: status
+                            })
+                        })
+                        .then(response => {
+                            // Handle response
+                            if (response.ok) {
+                                // Update UI or show success message
+                                // For example, update the status text
+                                document.getElementById('statusDropdown' + productId).innerText = status;
+                            } else {
+                                // Handle error response
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+
+                // Function to update status
+                function updateStatus(productId, status) {
+                    // Send AJAX request to update status
+                    fetch('/update-status', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}' // Assuming you're using CSRF protection
+                            },
+                            body: JSON.stringify({
+                                productId: productId,
+                                status: status
+                            })
+                        })
+                        .then(response => {
+                            // Handle response
+                            if (response.ok) {
+                                // Update UI or show success message
+                                // For example, update the status text
+                                document.getElementById('statusDropdown' + productId).innerText = status;
+                            } else {
+                                // Handle error response
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+
+
+                function editProduct(productId) {
+                    window.location.href = '/admin/product/edit/' + productId;
+                }
+                document.addEventListener("DOMContentLoaded", function() {
+                    const navLinks = document.querySelectorAll('.nav-item');
+                    navLinks.forEach(link => {
+                        link.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            const targetId = this.getAttribute(
+                                'data-target'); // Ambil ID target dari atribut data-target
+                            const target = document.querySelector(
+                                targetId); // Cari elemen dengan ID yang sesuai
+                            document.querySelector('.nav-item.active').classList.remove('active');
+                            this.classList.add('active');
+                        });
+                    });
+                });
+            </script>
+
     </body>
-@endsection
-
-@section('extra-content')
-    <!-- start here -->
-@endsection
-
-@section('extra-js')
-    <!-- start here -->
-@endsection
-
-@section('extra-script')
 @endsection
